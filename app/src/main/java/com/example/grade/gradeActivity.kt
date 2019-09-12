@@ -28,4 +28,8 @@ class gradeActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
+
+    fun createTheCourses(){
+        //TODO: Implement this function
+    }
 }
