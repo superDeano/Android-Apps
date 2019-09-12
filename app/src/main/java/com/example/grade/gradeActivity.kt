@@ -1,12 +1,10 @@
 package com.example.grade
 
-import android.app.ExpandableListActivity
+
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import com.alespero.expandablecardview.ExpandableCardView
 import kotlinx.android.synthetic.main.activity_grade.*
 
 class gradeActivity : AppCompatActivity() {
@@ -15,10 +13,6 @@ class gradeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grade)
 
-//        val card : ExpandableCardView = findViewById(R.id.profile)
-//        card.setOnExpandedListener { view, isExpanded ->
-//            Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
-//        }
 
         /**For the floating button from the toolbar*/
         setSupportActionBar(toolbar)
