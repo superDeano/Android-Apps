@@ -3,8 +3,11 @@ package com.example.grade
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.LinearLayout
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_grade.*
 
 class gradeActivity : AppCompatActivity() {
@@ -13,6 +16,9 @@ class gradeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grade)
 
+        /** For the Recycle View */
+//        var recyclerView = findViewById<RecyclerView>(R.id.recycler_view) as RecyclerView
+//        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         /**For the floating button from the toolbar*/
         setSupportActionBar(toolbar)
@@ -29,7 +35,7 @@ class gradeActivity : AppCompatActivity() {
         return true
     }
 
-    fun createTheCourses(){
+    fun createTheCourses() {
         //TODO: Implement this function
     }
 }
