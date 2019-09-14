@@ -11,7 +11,7 @@ class Course constructor(var courseTitle: String, var assignments: Array<Assignm
             courseID++
         }
 
-        fun generateRandomCourse(): Course {
+        fun generateARandomCourse(): Course {
 
             var numberOfAssignment = Random.nextInt(1, 5)
             var assignments: Array<Assignment> = arrayOf()
@@ -23,4 +23,13 @@ class Course constructor(var courseTitle: String, var assignments: Array<Assignm
             return Course("Course " + courseID, assignments)
         }
     }
+
+    fun returnAverageGrade(): Int {
+        var sum = 0
+        for (assignment in assignments) {
+        sum += assignment.grade
+        }
+        return  sum/assignments.size
+    }
 }
+

@@ -3,12 +3,13 @@ package com.example.grade
 
 import android.os.Bundle
 import android.view.Menu
-import android.widget.LinearLayout
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_grade.*
+import java.util.*
+
 
 class gradeActivity : AppCompatActivity() {
 
@@ -17,8 +18,7 @@ class gradeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_grade)
 
         /** For the Recycle View */
-//        var recyclerView = findViewById<RecyclerView>(R.id.recycler_view) as RecyclerView
-//        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
 
         /**For the floating button from the toolbar*/
         setSupportActionBar(toolbar)
@@ -37,5 +37,12 @@ class gradeActivity : AppCompatActivity() {
 
     fun createTheCourses() {
         //TODO: Implement this function
+    }
+
+    fun allowRecycleViewToExist(recyclerView: RecyclerView){
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.isAutoMeasureEnabled = true
+        recyclerView.setLayoutManager(layoutManager)
+        recyclerView.setNestedScrollingEnabled(false)
     }
 }

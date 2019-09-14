@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun showAllGrades() {
-        val moveToGradeActivity = Intent(this,gradeActivity::class.java)
+        val moveToGradeActivity = Intent(this,gradeActivity2::class.java)
         startActivity(moveToGradeActivity)
     }
 }

@@ -17,5 +17,6 @@ class Assignment public constructor(val assignmentTitle: String, var grade: Int)
 
             return Assignment(tempTitle, tempGrade)
         }
+
     }
 }

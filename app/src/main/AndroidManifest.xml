@@ -9,6 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".gradeActivity2"
+            android:label="@string/title_activity_grade"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.grade.MainActivity"></meta-data>
+        </activity>
+
         <activity
             android:name=".gradeActivity"
             android:label="@string/title_activity_grade"
@@ -18,6 +28,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grade.MainActivity" />
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
