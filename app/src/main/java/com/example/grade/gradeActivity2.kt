@@ -3,8 +3,6 @@ package com.example.grade
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Adapter
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
@@ -27,7 +25,7 @@ class gradeActivity2 : AppCompatActivity() {
         var dataList = ArrayList<Course>()
         dataList = generateCourses()
 
-        val recyclerViewAdapter = RecyclerViewAdapter(dataList)
+        val recyclerViewAdapter = CoursesRVAdapter(dataList)
         recyclerView.adapter = recyclerViewAdapter
     }
 

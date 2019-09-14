@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!-- The whole Card -->
     <androidx.cardview.widget.CardView
@@ -34,8 +34,8 @@
 
                     <!-- Title of the Course -->
                     <TextView
-                        android:layout_width="match_parent"
                         android:id="@+id/titleCourseTextView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="test 69"
                         android:textAllCaps="true"
@@ -46,7 +46,6 @@
 
 
                 <!-- Layout Per Assignments-->
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,30 +55,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <ListView
+                        <!--To Show all the Assignments from the Course-->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/assignmentsPerCourseRecyclerView"
                             android:layout_width="match_parent"
-                            android:id="@+id/allCoursesListView"
-                            android:layout_height="wrap_content">
-
-                            <!--Assignment Name -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/assignmentNameTextView"
-                                android:text="Assigment1"
-                                android:textColor="#F5F5F5"
-                                android:textSize="20dp" />
-
-                            <!--Assignment Grade -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/assignmentGradeTextView"
-                                android:layout_marginLeft="100dp"
-                                android:text="42%"
-                                android:textColor="#F5F5F5"
-                                android:textSize="20dp" />
-                        </ListView>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -103,9 +83,9 @@
 
                     <!--Average Grade for Course-->
                     <TextView
+                        android:id="@+id/averageCourseGradeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/averageCourseGradeTextView"
                         android:layout_marginLeft="85dp"
                         android:autoSizeTextType="uniform"
                         android:text="69%"
