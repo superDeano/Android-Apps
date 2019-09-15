@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg1"
+            android:background="@drawable/background1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -58,6 +58,7 @@
                         <!--To Show all the Assignments from the Course-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/assignmentsPerCourseRecyclerView"
+                            android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:scrollbars="vertical"/>
@@ -79,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:text="Average"
                         android:textAllCaps="true"
-                        android:textColor="#73DC7D"
+                        android:textColor="#54A15B"
                         android:textSize="28dp" />
 
                     <!--Average Grade for Course-->
@@ -87,10 +88,10 @@
                         android:id="@+id/averageCourseGradeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="105dp"
+                        android:layout_marginLeft="115dp"
                         android:autoSizeTextType="uniform"
-                        android:text="99%"
-                        android:textColor="#73DC7D"
+                        android:text="N/A"
+                        android:textColor="#ADDE99"
                         android:textSize="50dp"
                         android:typeface="monospace"
                         app:fontFamily="sans-serif-black" />

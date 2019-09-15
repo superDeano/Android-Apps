@@ -3,15 +3,10 @@ package com.example.grade
 import kotlin.random.Random
 
 class Assignment constructor(val assignmentTitle: String, val digitGrade: String) {
-    var letter: Boolean = true
+    var formatChange: Boolean = true
 
+    /**The companion object is Kotlin's way of enabling static functions*/
     companion object {
-        var assID: Int = 0
-
-        init {
-            assID++
-        }
-
 
         fun generateRandomAssignment(id: Int): Assignment {
             val tempTitle = "Assignment " + id
@@ -26,17 +21,18 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
 
     }
 
-
+    /*Allows for the Recycler To Display different grade Formats*/
     fun changeGradeFormat() {
-        when (letter) {
+        when (formatChange) {
             true -> grade = letterGrade
             false -> grade = digitGrade
         }
-        letter = !letter
+        formatChange = !formatChange
     }
 
     private var letterGrade = gradeLetter()
 
+    /**To get the equivalent letter grade*/
     private fun gradeLetter(): String {
 
         var tempAverageLetterGrade: String

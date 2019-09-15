@@ -27,10 +27,8 @@ class gradeActivity : AppCompatActivity() {
             // in content do not changeFormatGrade the layout size of the RecyclerView
             setHasFixedSize(true)
 
-            // use a linear layout manager
             layoutManager = viewManager
 
-            // specify an viewAdapter (see also next example)
             adapter = viewAdapter
         }
     }
@@ -41,7 +39,7 @@ class gradeActivity : AppCompatActivity() {
         return true
     }
 
-
+    //When the little menu button is selected
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         changeGradesFormat()
         return super.onOptionsItemSelected(item)
@@ -62,18 +60,10 @@ class gradeActivity : AppCompatActivity() {
 
     fun changeGradesFormat() {
 
-        System.out.println("Courses size is " + courses.size)
-
-        if (courses != null) {
-            System.out.println("Courses is not null")
-        }
         for (course in courses) {
             course.changeGradeFormat()
         }
-
+        //Notify the RecyclerView to refresh the grades being displayed
         viewAdapter.notifyDataSetChanged()
-
-        System.out.println("Touched!!!!!!!!!!!!!!!!!!!!!")
     }
-
 }

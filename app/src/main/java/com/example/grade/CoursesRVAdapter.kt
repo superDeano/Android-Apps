@@ -8,16 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.coursesrv.view.*
 
-class CoursesRVAdapter(val courses: ArrayList<Course>) :
-    RecyclerView.Adapter<CoursesRVAdapter.ViewHolder>() {
+class CoursesRVAdapter(val courses: ArrayList<Course>) : RecyclerView.Adapter<CoursesRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = LayoutInflater.from(p0?.context).inflate(R.layout.coursesrv, p0, false)
         return ViewHolder(view)
-    }
-
-    public fun notifyData(){
-
     }
 
     private var viewPool = RecyclerView.RecycledViewPool()
@@ -32,10 +27,9 @@ class CoursesRVAdapter(val courses: ArrayList<Course>) :
         val course = courses[position]
 
         holder.courseTitle.text = course.courseTitle
+        holder.averageGradeForCourse.text = course.averageGrade
 
-            holder.averageGradeForCourse.text = course.averageGrade
-        System.out.println("Assignment Grade "+ course.averageGrade)
-
+        //The other nested adapter to display the list of assignments per course
         val childLayoutManager = LinearLayoutManager(
             holder.assignmentsRV.context,
             RecyclerView.VERTICAL, false

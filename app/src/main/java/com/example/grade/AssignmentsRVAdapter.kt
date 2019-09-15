@@ -11,8 +11,7 @@ class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.assignmentsrv, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.assignmentsrv, parent, false)
         return ViewHolder(view)
     }
 
@@ -24,9 +23,7 @@ class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.assignmentTitle.text = assignments[position].assignmentTitle
-
         holder.assignmentGrade.text = assignments[position].grade
-        System.out.println("Assignment Grade "+ assignments[position].grade)
 
     }
 

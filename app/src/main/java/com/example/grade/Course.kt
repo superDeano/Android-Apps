@@ -5,12 +5,8 @@ import kotlin.random.Random
 class Course constructor(var courseTitle: String, var assignments: ArrayList<Assignment>) {
     var gradeInLetterFormat = true
 
+    /**Allows for the use of Static function as in Java*/
     companion object {
-        var courseID: Int = 0
-
-        init {
-            courseID++
-        }
 
         fun generateARandomCourse(id: Int): Course {
 
@@ -29,6 +25,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
 
     }
 
+    /*Easily calculate the average from all the assignment grades*/
     fun calculateAverageGrade(): String {
         var sum = 0
         if (assignments.size != 1) {
@@ -43,9 +40,11 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
 
     private var averageLetterGrade = gradeLetter()
 
+    /**To get the equivalent grade in letter format*/
     private fun gradeLetter(): String {
 
         var tempAverageLetterGrade: String
+
         if (calculateAverageGrade() != "N/A") {
             val grade = averageDigitGrade.toInt()
 
@@ -83,6 +82,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
 
     var averageGrade = averageDigitGrade
 
+    /*Used to change the data used by the Recycler View, allows it to know data has been changed and displays the different grade format*/
     fun changeGradeFormat() {
 
         when (gradeInLetterFormat) {
@@ -98,6 +98,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
         gradeInLetterFormat = !gradeInLetterFormat
     }
 
+    //Changes the grade format for the assignments too
     private fun changeAssignmentGradeFormat() {
         for (assignment in assignments) {
             assignment.changeGradeFormat()

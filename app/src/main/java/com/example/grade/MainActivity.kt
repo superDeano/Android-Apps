@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
         //Getting the reference for the show my grades button
         val showMyGradesButt = findViewById<Button>(R.id.seeGradesButt)
 
+        //Listener to know when the button is pressed onto
         showMyGradesButt.setOnClickListener{
             showAllGrades()
         }
     }
-
 
     fun showAllGrades(){
         val moveToGradeActivity = Intent (this, gradeActivity::class.java)
