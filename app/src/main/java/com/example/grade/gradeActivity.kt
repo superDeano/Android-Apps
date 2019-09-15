@@ -57,6 +57,11 @@ class gradeActivity : AppCompatActivity() {
         return courses
     }
 
+    override fun onBackPressed() {
+        courses.clear()
+        viewAdapter.notifyDataSetChanged()
+        super.onBackPressed()
+    }
 
     fun changeGradesFormat() {
 

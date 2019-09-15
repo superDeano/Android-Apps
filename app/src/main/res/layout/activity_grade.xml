@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="0dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
 
         <!-- A RecyclerView with some commonly used attributes -->
         <androidx.recyclerview.widget.RecyclerView

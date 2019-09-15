@@ -3,14 +3,13 @@ package com.example.grade
 import kotlin.random.Random
 
 class Course constructor(var courseTitle: String, var assignments: ArrayList<Assignment>) {
-    var gradeInLetterFormat = true
 
     /**Allows for the use of Static function as in Java*/
     companion object {
 
         fun generateARandomCourse(id: Int): Course {
 
-            var numberOfAssignment = Random.nextInt(0, 5)
+            var numberOfAssignment = Random.nextInt(0, 4)
             var assignments = ArrayList<Assignment>()
 
             if (numberOfAssignment != 0) {
@@ -85,17 +84,16 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
     /*Used to change the data used by the Recycler View, allows it to know data has been changed and displays the different grade format*/
     fun changeGradeFormat() {
 
-        when (gradeInLetterFormat) {
-            true -> {
+        when (averageGrade) {
+            averageDigitGrade -> {
                 averageGrade = averageLetterGrade
                 changeAssignmentGradeFormat()
             }
-            false -> {
+            averageLetterGrade -> {
                 averageGrade = averageDigitGrade
                 changeAssignmentGradeFormat()
             }
         }
-        gradeInLetterFormat = !gradeInLetterFormat
     }
 
     //Changes the grade format for the assignments too

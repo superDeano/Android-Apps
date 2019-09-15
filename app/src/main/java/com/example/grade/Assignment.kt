@@ -3,7 +3,6 @@ package com.example.grade
 import kotlin.random.Random
 
 class Assignment constructor(val assignmentTitle: String, val digitGrade: String) {
-    var formatChange: Boolean = true
 
     /**The companion object is Kotlin's way of enabling static functions*/
     companion object {
@@ -23,11 +22,10 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
 
     /*Allows for the Recycler To Display different grade Formats*/
     fun changeGradeFormat() {
-        when (formatChange) {
-            true -> grade = letterGrade
-            false -> grade = digitGrade
+        when (grade) {
+            letterGrade -> grade = digitGrade
+            digitGrade -> grade = letterGrade
         }
-        formatChange = !formatChange
     }
 
     private var letterGrade = gradeLetter()

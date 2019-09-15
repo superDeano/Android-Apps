@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         //Listener to know when the button is pressed onto
         showMyGradesButt.setOnClickListener{
             showAllGrades()
+
         }
     }
 
