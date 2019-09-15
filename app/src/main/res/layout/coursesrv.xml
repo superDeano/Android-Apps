@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:layout_height="wrap_content">
     <!-- The whole Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="273dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="30dp"
         app:cardCornerRadius="8dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg1"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
@@ -40,16 +40,16 @@
                         android:text="test 69"
                         android:textAllCaps="true"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="45dp"
+                        android:textSize="38dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <!-- Layout Per Assignments-->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -59,11 +59,12 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/assignmentsPerCourseRecyclerView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical"/>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
                 <LinearLayout
@@ -79,16 +80,16 @@
                         android:text="Average"
                         android:textAllCaps="true"
                         android:textColor="#73DC7D"
-                        android:textSize="30dp" />
+                        android:textSize="28dp" />
 
                     <!--Average Grade for Course-->
                     <TextView
                         android:id="@+id/averageCourseGradeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="85dp"
+                        android:layout_marginLeft="105dp"
                         android:autoSizeTextType="uniform"
-                        android:text="69%"
+                        android:text="99%"
                         android:textColor="#73DC7D"
                         android:textSize="50dp"
                         android:typeface="monospace"
@@ -98,7 +99,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>

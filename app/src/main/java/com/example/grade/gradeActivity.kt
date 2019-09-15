@@ -1,48 +1,82 @@
 package com.example.grade
 
-
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_grade.*
-import java.util.*
-
+import kotlin.random.Random
 
 class gradeActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var courses: ArrayList<Course>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grade)
 
-        /** For the Recycle View */
+        viewManager = LinearLayoutManager(this)
+        courses = generateCourses()
+        viewAdapter = CoursesRVAdapter(courses)
 
+        recyclerView = findViewById<RecyclerView>(R.id.ListCourses).apply {
+            // use this setting to improve performance if you know that changes
+            // in content do not changeFormatGrade the layout size of the RecyclerView
+            setHasFixedSize(true)
 
-        /**For the floating button from the toolbar*/
-        setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            // use a linear layout manager
+            layoutManager = viewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = viewAdapter
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    /**The three little dots at the top right hand corner in the action bar*/
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_grade, menu)
         return true
     }
 
-    fun createTheCourses() {
-        //TODO: Implement this function
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        changeGradesFormat()
+        return super.onOptionsItemSelected(item)
     }
 
-    fun allowRecycleViewToExist(recyclerView: RecyclerView){
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.isAutoMeasureEnabled = true
-        recyclerView.setLayoutManager(layoutManager)
-        recyclerView.setNestedScrollingEnabled(false)
+    fun generateCourses(): ArrayList<Course> {
+
+        var randomNumberOfCourse = Random.nextInt(1, 5)
+        var courses = ArrayList<Course>()
+
+        for (i in 0..randomNumberOfCourse) {
+            courses.add(Course.generateARandomCourse(i + 1))
+        }
+
+        return courses
     }
+
+
+    fun changeGradesFormat() {
+
+        var i = 0
+        System.out.println("Courses size is " + courses.size)
+
+        if (courses != null) {
+            System.out.println("Courses is not null")
+        }
+        for (i in 0..courses.size) {
+            courses[i].changeGradeFormat()
+
+            System.out.println("${i} + In for loop")
+        }
+
+        viewAdapter.notifyDataSetChanged()
+
+        System.out.println("Touched!!!!!!!!!!!!!!!!!!!!!")
+    }
+
 }
