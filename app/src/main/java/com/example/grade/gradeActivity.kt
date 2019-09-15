@@ -62,16 +62,13 @@ class gradeActivity : AppCompatActivity() {
 
     fun changeGradesFormat() {
 
-        var i = 0
         System.out.println("Courses size is " + courses.size)
 
         if (courses != null) {
             System.out.println("Courses is not null")
         }
-        for (i in 0..courses.size) {
-            courses[i].changeGradeFormat()
-
-            System.out.println("${i} + In for loop")
+        for (course in courses) {
+            course.changeGradeFormat()
         }
 
         viewAdapter.notifyDataSetChanged()

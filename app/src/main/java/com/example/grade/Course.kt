@@ -3,7 +3,7 @@ package com.example.grade
 import kotlin.random.Random
 
 class Course constructor(var courseTitle: String, var assignments: ArrayList<Assignment>) {
-    var gradeInLetterFormat = false
+    var gradeInLetterFormat = true
 
     companion object {
         var courseID: Int = 0
@@ -41,27 +41,47 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
 
     private val averageDigitGrade = calculateAverageGrade()
 
-    private val tempAverageLetterGrade = {
+    private var averageLetterGrade = gradeLetter()
 
+    private fun gradeLetter(): String {
+
+        var tempAverageLetterGrade: String
         if (calculateAverageGrade() != "N/A") {
-            when (calculateAverageGrade().toInt()) {
-                in 90..100 -> "A+"
-                in 85..89 -> "A"
-                in 80..84 -> "A-"
-                in 77..79 -> "B+"
-                in 73..76 -> "B"
-                in 70..72 -> "B-"
-                in 67..69 -> "C+"
-                in 60..62 -> "C-"
-                in 53..56 -> "D"
-                in 50..52 -> "D-"
-                else -> "F"
-            }
-        }
-    }
-    var averageLetterGrade: String = tempAverageLetterGrade.toString()
+            val grade = averageDigitGrade.toInt()
 
-    var averageGrade = averageLetterGrade
+            if (grade in 90..100) {
+                tempAverageLetterGrade = "A+"
+            } else if (grade in 85..89) {
+                tempAverageLetterGrade = "A"
+            } else if (grade in 80..84) {
+                tempAverageLetterGrade = "A-"
+            } else if (grade in 77..79) {
+                tempAverageLetterGrade = "B+"
+            } else if (grade in 73..76) {
+                tempAverageLetterGrade = "B"
+            } else if (grade in 70..72) {
+                tempAverageLetterGrade = "B-"
+            } else if (grade in 67..69) {
+                tempAverageLetterGrade = "C+"
+            } else if (grade in 63..66) {
+                tempAverageLetterGrade = "C"
+            } else if (grade in 60..62) {
+                tempAverageLetterGrade = "C-"
+            } else if (grade in 53..56) {
+                tempAverageLetterGrade = "D"
+            } else if (grade in 50..52) {
+                tempAverageLetterGrade = "D-"
+            } else {
+                tempAverageLetterGrade = "F"
+            }
+
+        } else {
+            tempAverageLetterGrade = averageDigitGrade
+        }
+        return tempAverageLetterGrade
+    }
+
+    var averageGrade = averageDigitGrade
 
     fun changeGradeFormat() {
 
@@ -75,7 +95,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
                 changeAssignmentGradeFormat()
             }
         }
-        !gradeInLetterFormat
+        gradeInLetterFormat = !gradeInLetterFormat
     }
 
     private fun changeAssignmentGradeFormat() {
