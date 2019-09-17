@@ -1,19 +1,23 @@
+//Data class for each assignment
 package com.example.grade
 
 import kotlin.random.Random
 
 class Assignment constructor(val assignmentTitle: String, val digitGrade: String) {
 
+    private var letterGrade = gradeLetter()
+    var grade: String = digitGrade
+
     /**The companion object is Kotlin's way of enabling static functions*/
     companion object {
 
+        //To generate a random assignment
         fun generateRandomAssignment(id: Int): Assignment {
-            val tempTitle = "Assignment " + id
-            val tempGrade = Random.nextInt(1, 100).toString()
 
-            return Assignment(tempTitle, tempGrade)
+            return Assignment("Assignment $id", Random.nextInt(1, 100).toString())
         }
 
+        //When no assignments for a course
         fun generateNoAssignment(): Assignment {
             return Assignment("No Assignments", "")
         }
@@ -28,7 +32,6 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
         }
     }
 
-    private var letterGrade = gradeLetter()
 
     /**To get the equivalent letter grade*/
     private fun gradeLetter(): String {
@@ -71,5 +74,4 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
     }
 
 
-    var grade: String = digitGrade
 }

@@ -1,3 +1,6 @@
+//Class containing all the logic for the grade activity
+
+
 package com.example.grade
 
 import androidx.appcompat.app.AppCompatActivity
@@ -22,13 +25,10 @@ class gradeActivity : AppCompatActivity() {
         courses = generateCourses()
         viewAdapter = CoursesRVAdapter(courses)
 
+        //Setting up the recycler view for the courses
         recyclerView = findViewById<RecyclerView>(R.id.ListCourses).apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not changeFormatGrade the layout size of the RecyclerView
             setHasFixedSize(true)
-
             layoutManager = viewManager
-
             adapter = viewAdapter
         }
     }
@@ -68,7 +68,7 @@ class gradeActivity : AppCompatActivity() {
     }
 
     private fun changeGradesFormat() {
-
+        //Changing the data the recycler view is receiving to change the format
         for (course in courses) {
             course.changeGradeFormat()
         }

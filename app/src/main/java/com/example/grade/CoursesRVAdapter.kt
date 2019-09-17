@@ -1,3 +1,6 @@
+//Class which is responsible to link the view and data for each course
+
+
 package com.example.grade
 
 import android.view.LayoutInflater
@@ -35,6 +38,7 @@ class CoursesRVAdapter(val courses: ArrayList<Course>) : RecyclerView.Adapter<Co
             RecyclerView.VERTICAL, false
         )
 
+        // Assignment RecyclerView adapter being set up
         holder.assignmentsRV.apply {
             layoutManager = childLayoutManager
             adapter = AssignmentsRVAdapter(course.assignments)

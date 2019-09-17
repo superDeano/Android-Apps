@@ -1,3 +1,4 @@
+//Adapter for each assignment per course
 package com.example.grade
 
 import android.view.LayoutInflater

@@ -1,3 +1,4 @@
+//Class which contains the logic for the main activity
 package com.example.grade
 
 import android.content.Intent
@@ -15,14 +16,15 @@ class MainActivity : AppCompatActivity() {
         val showMyGradesButt = findViewById<Button>(R.id.seeGradesButt)
 
         //Listener to know when the button is pressed onto
-        showMyGradesButt.setOnClickListener{
+        showMyGradesButt.setOnClickListener {
             showAllGrades()
 
         }
     }
 
-    fun showAllGrades(){
-        val moveToGradeActivity = Intent (this, gradeActivity::class.java)
+    fun showAllGrades() {
+        // Intent to move to the next activity
+        val moveToGradeActivity = Intent(this, gradeActivity::class.java)
         startActivity(moveToGradeActivity)
     }
 }
