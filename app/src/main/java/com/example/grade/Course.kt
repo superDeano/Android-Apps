@@ -4,8 +4,8 @@ package com.example.grade
 import kotlin.random.Random
 
 class Course constructor(var courseTitle: String, var assignments: ArrayList<Assignment>) {
-    private var averageLetterGrade = gradeLetter()
     private val averageDigitGrade = calculateAverageGrade()
+    private var averageLetterGrade = gradeLetter()
     var averageGrade = averageDigitGrade
 
     /**Allows for the use of Static function as in Java*/
@@ -26,7 +26,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
             } else {
                 assignments.add(Assignment.generateNoAssignment())
             }
-            return Course("Course " + id, assignments)
+            return Course("Course $id", assignments)
         }
 
     }
@@ -105,5 +105,7 @@ class Course constructor(var courseTitle: String, var assignments: ArrayList<Ass
             assignment.changeGradeFormat()
         }
     }
+
+
 }
 

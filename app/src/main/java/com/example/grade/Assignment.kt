@@ -13,8 +13,9 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
 
         //To generate a random assignment
         fun generateRandomAssignment(id: Int): Assignment {
-
-            return Assignment("Assignment $id", Random.nextInt(1, 100).toString())
+            //for readability purposes
+            val grade = Random.nextInt(1, 100).toString()
+            return Assignment("Assignment $id", grade)
         }
 
         //When no assignments for a course
