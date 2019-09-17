@@ -41,29 +41,33 @@ class gradeActivity : AppCompatActivity() {
 
     //When the little menu button is selected
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        changeGradesFormat()
+
+            if (item?.itemId == R.id.changeGradeFormat_settings) {
+                changeGradesFormat()
+            }
         return super.onOptionsItemSelected(item)
     }
 
-    fun generateCourses(): ArrayList<Course> {
+    private fun generateCourses(): ArrayList<Course> {
 
-        var randomNumberOfCourse = Random.nextInt(1, 5)
-        var courses = ArrayList<Course>()
+        val randomNumberOfCourses = Random.nextInt(1, 5)
+        val courses = ArrayList<Course>()
 
-        for (i in 0..randomNumberOfCourse) {
+        for (i in 0..randomNumberOfCourses) {
             courses.add(Course.generateARandomCourse(i + 1))
         }
 
         return courses
     }
 
+    //Trying to prevent the list from being reloaded
     override fun onBackPressed() {
         courses.clear()
         viewAdapter.notifyDataSetChanged()
         super.onBackPressed()
     }
 
-    fun changeGradesFormat() {
+    private fun changeGradesFormat() {
 
         for (course in courses) {
             course.changeGradeFormat()
