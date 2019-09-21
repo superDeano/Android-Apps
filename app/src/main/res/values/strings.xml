@@ -2,4 +2,6 @@
     <string name="app_name">Grade</string>
     <string name="title_activity_grade">My Grades</string>
     <string name="action_settings">Change Grade Format</string>
+    <string name="edit_profile">Edit Info</string>
+    <string name="delete_profile">Delete Info</string>
 </resources>

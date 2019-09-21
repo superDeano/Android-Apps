@@ -1,10 +1,12 @@
 //Adapter for each assignment per course
-package com.example.grade
+package com.example.grade.rvAdapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.grade.Assignment
+import com.example.grade.R
 import kotlinx.android.synthetic.main.assignmentsrv.view.*
 
 class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>) :

@@ -1,7 +1,7 @@
 //Class which is responsible to link the view and data for each course
 
 
-package com.example.grade
+package com.example.grade.rvAdapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.grade.Course
+import com.example.grade.R
 import kotlinx.android.synthetic.main.coursesrv.view.*
 
 class CoursesRVAdapter(val courses: ArrayList<Course>) : RecyclerView.Adapter<CoursesRVAdapter.ViewHolder>() {
