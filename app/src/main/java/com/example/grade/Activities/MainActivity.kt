@@ -43,12 +43,17 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-
+//Checks if there is any information stored in SharedPreference
         if (sharedPreference.noInfoSaved()) {
+            //If there is none, it loads the profile activity immediately
             showProfile()
-            Toast.makeText(applicationContext, "No Profile Information Found!", Toast.LENGTH_LONG).show()
-        } else if (sharedPreference.getProfileName() != null) {
-            showProfileButt.text = (sharedPreference.getProfileName())
+            //Telling the user there is no information
+            Toast.makeText(applicationContext, "No Profile Information Found!", Toast.LENGTH_LONG)
+                .show()
+
+        } else if (sharedPreference.getProfile().name != null) {
+            //There is information, thus displays the name in the button
+            showProfileButt.text = (sharedPreference.getProfile().name)
         }
     }
 
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showProfile() {
+        //Intent to show profile activity
         val showProfileActivity = Intent(this, profileActivity::class.java)
         startActivity(showProfileActivity)
     }
