@@ -4,4 +4,6 @@
     <string name="action_settings">Change Grade Format</string>
     <string name="edit_profile">Edit Info</string>
     <string name="delete_profile">Delete Info</string>
+    <string name = "random_grades">See Random Grades</string>
+    <string name="menu_profile">See Profile</string>
 </resources>
