@@ -9,25 +9,32 @@ import com.example.grade.Classes.Assignment
 import com.example.grade.R
 import kotlinx.android.synthetic.main.assignmentsrv.view.*
 
-class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>) :
+class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>?) :
     RecyclerView.Adapter<AssignmentsRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.assignmentsrv, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.assignmentsrv, parent, false)
         return ViewHolder(view)
     }
 
 
     override fun getItemCount(): Int {
-        return assignments.size
+
+        if (assignments != null) {
+            return assignments.size
+        } else {
+            return 0
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.assignmentTitle.text = assignments[position].assignmentTitle
-        holder.assignmentGrade.text = assignments[position].grade
-
+        if (assignments != null) {
+            holder.assignmentTitle.text = assignments[position].assignmentTitle
+            holder.assignmentGrade.text = assignments[position].grade
+        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

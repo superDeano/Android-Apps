@@ -17,12 +17,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/customCourseNameInCourseActivity"
+            android:textSize="25dp"
+            android:textColor="#37C43E"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="Test"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:id="@+id/customCourseIdInCourseActivity"
+            android:textSize="25dp"
+            android:textColor="#37C43E"
+            android:textStyle="bold"
             android:text="Test"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customAssignmentRV"
             android:layout_below="@+id/customCourseNameInCourseActivity"
+            android:paddingLeft="35dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
