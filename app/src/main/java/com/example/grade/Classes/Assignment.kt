@@ -1,9 +1,10 @@
 //Data class for each assignment
 package com.example.grade.Classes
 
+import java.io.Serializable
 import kotlin.random.Random
 
-class Assignment constructor(val assignmentTitle: String, val digitGrade: String) {
+class Assignment constructor(val assignmentTitle: String, val digitGrade: String) : Serializable {
 
     private var letterGrade = gradeLetter()
     var grade: String = digitGrade

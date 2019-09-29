@@ -33,10 +33,12 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>) :
         holder.customCourseName.text = customCourse.courseName
         holder.customCourseIdTV.text = customCourse.courseID
         holder.customCourseAverageGrade.text = customCourse.courseAverage
+
         holder.cardview.setOnClickListener {
+
             val intent = Intent(holder.cardview.context, AssignmentActivity::class.java)
-            intent.putExtra(customCourses)
-            startActivity(holder.cardview.context, intent,null)
+            intent.putExtra("COURSE", customCourses[position])
+            startActivity(holder.cardview.context, intent, null)
         }
     }
 
