@@ -1,39 +1,34 @@
 //Class which contains the logic for the main activity
 package com.example.grade.Activities
 
-import android.content.AbstractThreadedSyncAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.R
 import com.example.grade.rvAdapters.CustomCoursesRVAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var fab: FloatingActionButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = CustomCoursesRVAdapter(generateFewCourses())
-
-        recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+        initView()
 
     }
 
@@ -52,6 +47,10 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onStart() {
+        super.onStart()
+        animateFloatingButton()
+    }
 
     fun showRandomGrades() {
         // Intent to move to the next activity
@@ -87,5 +86,31 @@ class MainActivity : AppCompatActivity() {
             assignments.add(Assignment.generateRandomAssignment(i))
         }
         return assignments
+    }
+
+    fun initView() {
+        fab = findViewById(R.id.floatingAddCustomCourseButton)
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = CustomCoursesRVAdapter(generateFewCourses())
+
+        recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
+
+    }
+
+    fun animateFloatingButton() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy < 0 && !fab.isShown())
+                    fab.show()
+                else if (dy > 0 && fab.isShown())
+                    fab.hide()
+            }
+
+        })
     }
 }
