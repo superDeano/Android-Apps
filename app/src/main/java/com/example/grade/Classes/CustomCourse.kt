@@ -1,13 +1,13 @@
 package com.example.grade.Classes
 
-import android.annotation.TargetApi
-import java.util.stream.Stream
+import java.io.Serializable
+
 
 class CustomCourse constructor(
     var courseName: String,
     var courseID: String,
     var assignments: ArrayList<Assignment>?
-) {
+) : Serializable {
     var courseAverage: String?
 
     init {

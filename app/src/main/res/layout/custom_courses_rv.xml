@@ -2,12 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/customCourseCardView"
         android:layout_marginLeft="30dp"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/background1">
@@ -66,7 +70,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="10dp"
                 android:text="N/A"
-                android:textSize="24dp"
+                android:textSize="45dp"
                 android:textStyle="bold" />
 
 

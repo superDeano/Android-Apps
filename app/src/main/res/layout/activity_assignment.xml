@@ -14,9 +14,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/customCourseNameInCourseActivity"
+            android:text="Test"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/customCourseRV"
+            android:id="@+id/customAssignmentRV"
+            android:layout_below="@+id/customCourseNameInCourseActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

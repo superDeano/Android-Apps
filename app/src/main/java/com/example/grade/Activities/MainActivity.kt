@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.Assignment
@@ -68,7 +70,13 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..10) {
 
-            customCourses.add(CustomCourse("Course Name $i", "course ID $i", generateFewAssignments()))
+            customCourses.add(
+                CustomCourse(
+                    "Course Name $i",
+                    "course ID $i",
+                    generateFewAssignments()
+                )
+            )
         }
         return customCourses
     }
