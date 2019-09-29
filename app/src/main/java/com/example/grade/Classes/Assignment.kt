@@ -1,5 +1,5 @@
 //Data class for each assignment
-package com.example.grade
+package com.example.grade.Classes
 
 import kotlin.random.Random
 

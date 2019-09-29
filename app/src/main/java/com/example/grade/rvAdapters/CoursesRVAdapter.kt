@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grade.Course
+import com.example.grade.Classes.Course
 import com.example.grade.R
 import kotlinx.android.synthetic.main.coursesrv.view.*
 
@@ -49,7 +49,7 @@ class CoursesRVAdapter(val courses: ArrayList<Course>) : RecyclerView.Adapter<Co
 
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val courseTitle = itemView.findViewById<TextView>(R.id.titleCourseTextView)
         val assignmentsRV: RecyclerView = itemView.assignmentsPerCourseRecyclerView
         val averageGradeForCourse = itemView.findViewById<TextView>(R.id.averageCourseGradeTextView)

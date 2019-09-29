@@ -5,15 +5,12 @@ package com.example.grade.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
-import com.example.grade.Profile
+import com.example.grade.Classes.Profile
 import com.example.grade.R
 import com.example.grade.SharedPreferenceHelper
 import com.google.android.material.textfield.TextInputEditText

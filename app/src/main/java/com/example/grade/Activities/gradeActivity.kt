@@ -9,7 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grade.Course
+import com.example.grade.Classes.Course
 import com.example.grade.rvAdapters.CoursesRVAdapter
 import com.example.grade.R
 import kotlin.random.Random
@@ -63,12 +63,6 @@ class gradeActivity : AppCompatActivity() {
         return courses
     }
 
-//    //Trying to prevent the list from being reloaded
-//    override fun onBackPressed() {
-//        courses.clear()
-//        viewAdapter.notifyDataSetChanged()
-//        super.onBackPressed()
-//    }
 
     private fun changeGradesFormat() {
         //Changing the data the recycler view is receiving to change the format

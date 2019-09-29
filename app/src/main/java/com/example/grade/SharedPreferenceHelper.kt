@@ -3,6 +3,7 @@ package com.example.grade
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import com.example.grade.Classes.Profile
 
 /**
  * In MVC, this is the controller class

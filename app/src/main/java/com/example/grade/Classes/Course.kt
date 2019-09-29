@@ -1,5 +1,5 @@
 //Data model for a course
-package com.example.grade
+package com.example.grade.Classes
 
 import kotlin.random.Random
 

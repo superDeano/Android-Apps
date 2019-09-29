@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grade.Assignment
+import com.example.grade.Classes.Assignment
 import com.example.grade.R
 import kotlinx.android.synthetic.main.assignmentsrv.view.*
 
