@@ -14,7 +14,7 @@ import com.example.grade.rvAdapters.CoursesRVAdapter
 import com.example.grade.R
 import kotlin.random.Random
 
-class gradeActivity : AppCompatActivity() {
+class GradeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager

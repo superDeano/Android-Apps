@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_seeProfile"
+        android:icon="@drawable/person_icon"
+        android:title="@string/menu_profile"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menuSeeRandomGrades"
+        android:orderInCategory="100"
+        android:title="@string/random_grades"
+        app:showAsAction="never" />
+</menu>

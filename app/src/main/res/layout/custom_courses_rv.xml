@@ -12,7 +12,7 @@
         android:layout_marginLeft="30dp"
         android:clickable="true"
         app:cardCornerRadius="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/background1">
 

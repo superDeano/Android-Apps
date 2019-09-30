@@ -2,7 +2,6 @@ package com.example.grade.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +55,9 @@ class AssignmentActivity : AppCompatActivity() {
         viewAdapter = AssignmentsRVAdapter(course.assignments)
         assignmentRV = findViewById(R.id.customAssignmentRV)
         floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)
+
+        floatingActionButton.setBackgroundColor(1)
+
         assignmentRV.apply {
             layoutManager = viewManager
             adapter = viewAdapter

@@ -15,8 +15,6 @@ import com.example.grade.rvAdapters.CustomCoursesRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -33,18 +31,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu_profile, menu)
-        menuInflater.inflate(R.menu.main_menu_random_grades, menu)
+        menuInflater.inflate(R.menu.go_to_profile, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menuSeeProfile) {
-            showProfile()
-        } else if (item?.itemId == R.id.menuSeeRandomGrades) {
-            showRandomGrades()
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_seeProfile -> {
+            showProfile(); true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.menuSeeRandomGrades -> {
+            showRandomGrades(); true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showRandomGrades() {
         // Intent to move to the next activity
-        val moveToGradeActivity = Intent(this, gradeActivity::class.java)
+        val moveToGradeActivity = Intent(this, GradeActivity::class.java)
         startActivity(moveToGradeActivity)
     }
 

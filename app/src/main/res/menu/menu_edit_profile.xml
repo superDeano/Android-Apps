@@ -1,9 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.grade.Activities.gradeActivity">
+    tools:context="com.example.grade.Activities.GradeActivity">
     <item
         android:id="@+id/profileMenu_edit"
         android:orderInCategory="100"
         android:title="@string/edit_profile" />
+    <item
+        android:id="@+id/profileMenu_delete"
+        android:orderInCategory="100"
+        android:title="@string/delete_profile" />
 </menu>

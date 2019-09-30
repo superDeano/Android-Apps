@@ -55,18 +55,18 @@ class profileActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //Creating the menus
         menuInflater.inflate(R.menu.menu_edit_profile, menu)
-        menuInflater.inflate(R.menu.menu_delete_profile, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         //Checking which menu is selected and call the required function
-        if (item?.itemId == R.id.profileMenu_delete) {
-            deleteAllInfo()
-        } else if (item?.itemId == R.id.profileMenu_edit) {
-            enableEditMode()
+        R.id.profileMenu_delete -> {
+            deleteAllInfo(); true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.profileMenu_edit -> {
+            enableEditMode(); true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     //Enabling edit mode so user can edit information
