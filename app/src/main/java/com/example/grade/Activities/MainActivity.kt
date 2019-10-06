@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
+import com.example.grade.Fragments.AddCourseFragment
 import com.example.grade.R
 import com.example.grade.rvAdapters.CustomCoursesRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.go_to_profile, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -50,19 +51,19 @@ class MainActivity : AppCompatActivity() {
         animateFloatingButton()
     }
 
-    fun showRandomGrades() {
+    private fun showRandomGrades() {
         // Intent to move to the next activity
         val moveToGradeActivity = Intent(this, GradeActivity::class.java)
         startActivity(moveToGradeActivity)
     }
 
-    fun showProfile() {
+    private fun showProfile() {
         //Intent to show profile activity
         val showProfileActivity = Intent(this, profileActivity::class.java)
         startActivity(showProfileActivity)
     }
 
-    fun generateFewCourses(): ArrayList<CustomCourse> {
+    private fun generateFewCourses(): ArrayList<CustomCourse> {
         val customCourses = ArrayList<CustomCourse>()
 
         for (i in 0..10) {
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         return customCourses
     }
 
-    fun generateFewAssignments(): ArrayList<Assignment> {
+    private fun generateFewAssignments(): ArrayList<Assignment> {
         val assignments = ArrayList<Assignment>()
         for (i in 1..5) {
             assignments.add(Assignment.generateRandomAssignment(i))
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         return assignments
     }
 
-    fun initView() {
+    private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
         viewManager = LinearLayoutManager(this)
         viewAdapter = CustomCoursesRVAdapter(generateFewCourses())
@@ -95,10 +96,10 @@ class MainActivity : AppCompatActivity() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
+        addListenerOnFloatingButton()
     }
 
-    fun animateFloatingButton() {
+    private fun animateFloatingButton() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -110,5 +111,15 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun addListenerOnFloatingButton() {
+        fab.setOnClickListener {
+            val addCourseDialog = AddCourseFragment()
+
+            addCourseDialog.show(supportFragmentManager, "Insert Course")
+
+            fab.hide()
+        }
     }
 }

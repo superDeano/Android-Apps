@@ -5,7 +5,7 @@
         android:id="@+id/action_seeProfile"
         android:icon="@drawable/person_icon"
         android:title="@string/menu_profile"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuSeeRandomGrades"

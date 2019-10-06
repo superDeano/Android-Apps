@@ -54,7 +54,7 @@ class profileActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //Creating the menus
-        menuInflater.inflate(R.menu.menu_edit_profile, menu)
+        menuInflater.inflate(R.menu.menu_profile, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
