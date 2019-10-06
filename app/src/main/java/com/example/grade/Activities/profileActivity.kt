@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.example.grade.CheckingInputHelper
 import com.example.grade.Classes.Profile
 import com.example.grade.R
 import com.example.grade.SharedPreferenceHelper
@@ -140,22 +141,7 @@ class profileActivity : AppCompatActivity() {
 
     //Checks if the name format is correct
     private fun nameFormatIsCorrect(): Boolean {
-        if (nameTextField.text.toString() == "") {
-            nameTFLayout.error = "Enter Something!"
-            return false
-        }
-
-        //To check if only alphabetical letter were inputted
-        val name = nameTextField.text.toString().toCharArray()
-        for (letter in name) {
-            if (!Character.isLetter(letter) && letter != ' ') {
-                nameTFLayout.error = "Please enter a better name"
-                return false
-            } else {
-                nameTFLayout.error = ""
-            }
-        }
-        return true
+        return CheckingInputHelper.checkNameFormat(nameTextField, nameTFLayout)
     }
 
     //Checking the age is correct

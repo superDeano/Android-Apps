@@ -1,4 +1,5 @@
 package com.example.grade.Fragments
+
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
+import com.example.grade.DataBaseHelper
 
 import com.example.grade.R
 
@@ -21,6 +23,7 @@ class AddCourseFragment : DialogFragment() {
     private lateinit var addCourseIdLayout: TextInputLayout
     private lateinit var addCourseButton: Button
     private lateinit var cancelButton: Button
+    val dbHelper = DataBaseHelper(this.context)
 
     companion object {
         fun newInstance(): AddCourseFragment {
@@ -54,7 +57,7 @@ class AddCourseFragment : DialogFragment() {
     private fun addListenersOnButtons() {
 
         addCourseButton.setOnClickListener {
-
+        addCourse()
         }
 
         cancelButton.setOnClickListener {
@@ -77,6 +80,6 @@ class AddCourseFragment : DialogFragment() {
 
 
     private fun addCourse() {
-//        TODO : Implement this
+
     }
 }

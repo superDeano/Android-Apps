@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
+import com.example.grade.DataBaseHelper
 import com.example.grade.Fragments.AddCourseFragment
 import com.example.grade.R
 import com.example.grade.rvAdapters.CustomCoursesRVAdapter
@@ -20,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    lateinit var fab: FloatingActionButton
-
+    private lateinit var fab: FloatingActionButton
+    val dbHelper = DataBaseHelper(applicationContext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +70,9 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..10) {
 
+            val id = i.toLong()
             customCourses.add(
-                CustomCourse(
-                    "Course Name $i",
-                    "course ID $i", null
-//                    generateFewAssignments()
-                )
+                CustomCourse(id, "Course Name $i", "course ID $i")
             )
         }
         return customCourses
@@ -91,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
         viewManager = LinearLayoutManager(this)
-        viewAdapter = CustomCoursesRVAdapter(generateFewCourses())
+        viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())//generateFewCourses())
 
         recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
             layoutManager = viewManager
@@ -120,9 +118,12 @@ class MainActivity : AppCompatActivity() {
 
             fab.hide()
             addCourseDialog.show(supportFragmentManager, "Insert Course")
-
+            fab.show()
         }
     }
 
+    private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
+        return dbHelper.getAllCourses()
+    }
 
 }

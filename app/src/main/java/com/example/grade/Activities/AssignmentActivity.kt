@@ -45,14 +45,15 @@ class AssignmentActivity : AppCompatActivity() {
 
 
     fun getCourseFromIntent() {
-        course = intent.extras.get("COURSE") as CustomCourse
+
+        course = intent.extras?.get("COURSE") as CustomCourse
     }
 
     fun initViews() {
         courseName = findViewById(R.id.customCourseNameInCourseActivity)
         courseID = findViewById(R.id.customCourseIdInCourseActivity)
         viewManager = LinearLayoutManager(this)
-        viewAdapter = AssignmentsRVAdapter(course.assignments)
+        viewAdapter = AssignmentsRVAdapter(null)
         assignmentRV = findViewById(R.id.customAssignmentRV)
         floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)
 
