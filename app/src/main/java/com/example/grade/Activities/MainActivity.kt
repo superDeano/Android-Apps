@@ -71,8 +71,8 @@ class MainActivity : AppCompatActivity() {
             customCourses.add(
                 CustomCourse(
                     "Course Name $i",
-                    "course ID $i",
-                    generateFewAssignments()
+                    "course ID $i",null
+//                    generateFewAssignments()
                 )
             )
         }

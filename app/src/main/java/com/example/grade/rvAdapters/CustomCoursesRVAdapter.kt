@@ -12,7 +12,7 @@ import com.example.grade.Activities.AssignmentActivity
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.R
 
-class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>) :
+class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
     RecyclerView.Adapter<CustomCoursesRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -25,20 +25,26 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>) :
     }
 
     override fun getItemCount(): Int {
-        return customCourses.size
+        when (customCourses == null) {
+            true -> return 1
+            false -> return customCourses!!.size
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val customCourse = customCourses[position]
-        holder.customCourseName.text = customCourse.courseName
-        holder.customCourseIdTV.text = customCourse.courseID
-        holder.customCourseAverageGrade.text = customCourse.courseAverage
 
-        holder.cardview.setOnClickListener {
+        if (customCourses != null) {
+            val customCourse = customCourses!![position]
+            holder.customCourseName.text = customCourse.courseName
+            holder.customCourseIdTV.text = customCourse.courseID
+            holder.customCourseAverageGrade.text = customCourse!!.courseAverage
 
-            val intent = Intent(holder.cardview.context, AssignmentActivity::class.java)
-            intent.putExtra("COURSE", customCourses[position])
-            startActivity(holder.cardview.context, intent, null)
+            holder.cardview.setOnClickListener {
+
+                val intent = Intent(holder.cardview.context, AssignmentActivity::class.java)
+                intent.putExtra("COURSE", customCourses[position])
+                startActivity(holder.cardview.context, intent, null)
+            }
         }
     }
 

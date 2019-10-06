@@ -34,9 +34,6 @@ class AddCourseFragment : DialogFragment() {
     }
 
 
-
-
-
     private fun initView(view: View) {
         //Initializing the views
         addCourseNameTF = view.findViewById(R.id.addingCourseNameTF)
@@ -60,9 +57,6 @@ class AddCourseFragment : DialogFragment() {
     }
 
     private fun cancelDialog() {
-//        val dialog = getDialog()
-//        dialog?.dismiss()
-//        activity?.fragmentManager?.popBackStack()
         dialog?.dismiss()
         Log.v("Cancel button", "Pressed")
 

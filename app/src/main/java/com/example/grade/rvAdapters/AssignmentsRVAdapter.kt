@@ -22,10 +22,9 @@ class AssignmentsRVAdapter(val assignments: ArrayList<Assignment>?) :
 
     override fun getItemCount(): Int {
 
-        if (assignments != null) {
-            return assignments.size
-        } else {
-            return 0
+        when (assignments != null) {
+            true -> return assignments.size
+            false -> return 0
         }
     }
 
