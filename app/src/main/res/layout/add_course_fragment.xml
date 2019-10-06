@@ -88,7 +88,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="-75dp"
                 android:background="@drawable/mybutton"
-                android:text="Add Course"
+                android:text="Add"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 

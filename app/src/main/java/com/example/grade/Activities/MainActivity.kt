@@ -1,9 +1,9 @@
 //Class which contains the logic for the main activity
 package com.example.grade.Activities
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var fab: FloatingActionButton
-    val dbHelper = DataBaseHelper(applicationContext)
+    lateinit var dbHelper: DataBaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        dbHelper = DataBaseHelper(applicationContext)
         initView()
 
     }
@@ -115,14 +115,21 @@ class MainActivity : AppCompatActivity() {
     private fun addListenerOnFloatingButton() {
         fab.setOnClickListener {
             val addCourseDialog = AddCourseFragment()
-
+            addCourseDialog.setFAB(fab)
             fab.hide()
             addCourseDialog.show(supportFragmentManager, "Insert Course")
-            fab.show()
+
+            Log.v("FAB", "trying to show button")
+
         }
     }
 
+    fun reloadCourses(){
+        viewAdapter.notifyDataSetChanged()
+    }
+
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
+
         return dbHelper.getAllCourses()
     }
 

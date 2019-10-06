@@ -1,6 +1,5 @@
 package com.example.grade
 
-import android.annotation.TargetApi
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -13,7 +12,7 @@ import com.example.grade.Classes.CustomCourse
 import java.lang.Exception
 import kotlin.collections.ArrayList
 
-@TargetApi(28)
+
 class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
     context, Config.DATABASE_NAME.toString(), null,
     Config.DATABASE_VERSION.value.toInt()
@@ -23,7 +22,7 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
 
         val CREATE_COURSE_TABLE =
-            "CREATE TABLE " + Config.TABLE_COURSE.value + "(" + Config.COLUMN_COURSE_ID.value + " INTEGER PRIMARY KEY AUOINCREMENT, " + Config.COLUMN_COURSE_TITLE.value + " TEXT NOT NULL, " + Config.COLUMN_COURSE_CODE.value + " TEXT NOT NULL " + ")"
+            "CREATE TABLE " + Config.TABLE_COURSE.value + "(" + Config.COLUMN_COURSE_ID.value + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Config.COLUMN_COURSE_TITLE.value + " TEXT NOT NULL, " + Config.COLUMN_COURSE_CODE.value + " TEXT NOT NULL " + ")"
 
         db?.execSQL(CREATE_COURSE_TABLE)
     }
@@ -33,24 +32,36 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         onCreate(db)
     }
 
+
     fun insertCourse(course: CustomCourse): Long {
         var id: Long = -1
 
-        val sqLiteDatabase = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(Config.COLUMN_COURSE_TITLE.value, (course.courseName))
-        contentValues.put(Config.COLUMN_COURSE_CODE.value, (course.courseID))
-
         try {
-            id = sqLiteDatabase.insertOrThrow(Config.TABLE_COURSE.value, null, contentValues)
+            val sqLiteDatabase = writableDatabase
+
+
+            if (sqLiteDatabase != null) {
+                Log.d("ADDing Course", "database is Not fucking null")
+
+                val contentValues = ContentValues()
+                contentValues.put(Config.COLUMN_COURSE_TITLE.value, course.courseName)
+                contentValues.put(Config.COLUMN_COURSE_CODE.value, course.courseID)
+
+                try {
+                    id =
+                        sqLiteDatabase.insertOrThrow(Config.TABLE_COURSE.value, null, contentValues)
+                } catch (e: SQLiteException) {
+                    Log.d("Inserting Course", e.message)
+                    Toast.makeText(context, "Operation Failed " + e.message, Toast.LENGTH_LONG)
+                        .show()
+
+                } finally {
+                    sqLiteDatabase.close()
+                }
+            }
         } catch (e: SQLiteException) {
-            Log.v("Inserting Course", e.message)
-            Toast.makeText(context, "Operation Failed " + e.message, Toast.LENGTH_LONG).show()
-
-        } finally {
-            sqLiteDatabase.close()
+            Log.d("AddingCourse", e.message)
         }
-
         return id
     }
 
@@ -91,7 +102,7 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
             }
 
         } catch (e: Exception) {
-            Log.v("Getting Courses", e.message)
+            Log.d("Getting Courses", e.message)
             Toast.makeText(context, "Can't get Courses", Toast.LENGTH_LONG).show()
         } finally {
 //            cursor.close()

@@ -26,7 +26,7 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
 
     override fun getItemCount(): Int {
         when (customCourses == null) {
-            true -> return 1
+            true -> return 0
             false -> return customCourses!!.size
         }
     }
@@ -37,7 +37,7 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
             val customCourse = customCourses!![position]
             holder.customCourseName.text = customCourse.courseName
             holder.customCourseIdTV.text = customCourse.courseID
-            holder.customCourseAverageGrade.text //= customCourse!!.courseAverage
+            holder.customCourseAverageGrade.text //TODO: fix this
 
             holder.cardview.setOnClickListener {
 

@@ -1,5 +1,6 @@
 package com.example.grade.Fragments
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
+import com.example.grade.Activities.MainActivity
+import com.example.grade.CheckingInputHelper
+import com.example.grade.Classes.CustomCourse
 import com.example.grade.DataBaseHelper
 
 import com.example.grade.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -23,7 +28,8 @@ class AddCourseFragment : DialogFragment() {
     private lateinit var addCourseIdLayout: TextInputLayout
     private lateinit var addCourseButton: Button
     private lateinit var cancelButton: Button
-    val dbHelper = DataBaseHelper(this.context)
+    var dbHelper: DataBaseHelper? = null
+    lateinit var fab: FloatingActionButton
 
     companion object {
         fun newInstance(): AddCourseFragment {
@@ -42,6 +48,11 @@ class AddCourseFragment : DialogFragment() {
         return view
     }
 
+    override fun onAttach(context: Context) {
+
+        super.onAttach(context)
+        dbHelper = DataBaseHelper(activity)
+    }
 
     private fun initView(view: View) {
         //Initializing the views
@@ -57,7 +68,7 @@ class AddCourseFragment : DialogFragment() {
     private fun addListenersOnButtons() {
 
         addCourseButton.setOnClickListener {
-        addCourse()
+            addCourse()
         }
 
         cancelButton.setOnClickListener {
@@ -67,19 +78,41 @@ class AddCourseFragment : DialogFragment() {
 
     override fun onCancel(dialog: DialogInterface) {
         Log.v("Cancel Dialog", "onCancel Function called")
+        fab.show()
         super.onCancel(dialog)
 
+    }
+
+    fun setFAB(fab: FloatingActionButton) {
+        this.fab = fab
     }
 
     private fun cancelDialog() {
         dialog?.cancel()
         Log.v("Cancel button", "Pressed")
 
-
     }
 
 
     private fun addCourse() {
+        if (formatInfoEnterredIsCorrect()) {
+            dbHelper!!.insertCourse(
+                CustomCourse(
+                    -1,
+                    addCourseNameTF.text.toString(),
+                    addCourseIdTF.text.toString()
+                )
+            )
+            //TODO: Close dialog then reload activity
+            val act = activity as MainActivity
+            act.reloadCourses()
+        }
+    }
 
+    private fun formatInfoEnterredIsCorrect(): Boolean {
+        return (CheckingInputHelper.checkNameFormat(
+            addCourseNameTF,
+            addCourseNameLayout
+        ) && CheckingInputHelper.checkNameFormat(addCourseIdTF, addCourseIdLayout))
     }
 }
