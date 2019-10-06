@@ -1,5 +1,5 @@
 package com.example.grade.Fragments
-import androidx.lifecycle.ViewModelProviders
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
+
 import com.example.grade.R
+
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -27,7 +29,11 @@ class AddCourseFragment : DialogFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.add_course_fragment, container, false)
         initView(view)
         return view
@@ -56,9 +62,16 @@ class AddCourseFragment : DialogFragment() {
         }
     }
 
+    override fun onCancel(dialog: DialogInterface) {
+        Log.v("Cancel Dialog", "onCancel Function called")
+        super.onCancel(dialog)
+
+    }
+
     private fun cancelDialog() {
-        dialog?.dismiss()
+        dialog?.cancel()
         Log.v("Cancel button", "Pressed")
+
 
     }
 

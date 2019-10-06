@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var fab: FloatingActionButton
+    lateinit var fab: FloatingActionButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        fab.show()
         animateFloatingButton()
     }
 
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             customCourses.add(
                 CustomCourse(
                     "Course Name $i",
-                    "course ID $i",null
+                    "course ID $i", null
 //                    generateFewAssignments()
                 )
             )
@@ -117,9 +118,11 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val addCourseDialog = AddCourseFragment()
 
+            fab.hide()
             addCourseDialog.show(supportFragmentManager, "Insert Course")
 
-            fab.hide()
         }
     }
+
+
 }
