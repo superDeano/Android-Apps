@@ -48,6 +48,12 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
         }
     }
 
+    fun setData(data: ArrayList<CustomCourse>){
+        customCourses!!.clear()
+        customCourses.addAll(data)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val customCourseName = itemView.findViewById<TextView>(R.id.customCourseName)
         val customCourseIdTV = itemView.findViewById<TextView>(R.id.customCourseId)

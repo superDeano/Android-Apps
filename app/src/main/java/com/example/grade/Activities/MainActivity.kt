@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.DataBaseHelper
 import com.example.grade.Fragments.AddCourseFragment
@@ -65,36 +64,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(showProfileActivity)
     }
 
-    private fun generateFewCourses(): ArrayList<CustomCourse> {
-        val customCourses = ArrayList<CustomCourse>()
-
-        for (i in 0..10) {
-
-            val id = i.toLong()
-            customCourses.add(
-                CustomCourse(id, "Course Name $i", "course ID $i")
-            )
-        }
-        return customCourses
-    }
-
-    private fun generateFewAssignments(): ArrayList<Assignment> {
-        val assignments = ArrayList<Assignment>()
-        for (i in 1..5) {
-            assignments.add(Assignment.generateRandomAssignment(i))
-        }
-        return assignments
-    }
 
     private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())//generateFewCourses())
-
-        recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+       reloadCourses()
         addListenerOnFloatingButton()
     }
 
@@ -118,18 +91,23 @@ class MainActivity : AppCompatActivity() {
             addCourseDialog.setFAB(fab)
             fab.hide()
             addCourseDialog.show(supportFragmentManager, "Insert Course")
-
+//            reloadCourses()
             Log.v("FAB", "trying to show button")
 
         }
     }
 
     fun reloadCourses(){
-        viewAdapter.notifyDataSetChanged()
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())
+
+        recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
     }
 
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
-
         return dbHelper.getAllCourses()
     }
 

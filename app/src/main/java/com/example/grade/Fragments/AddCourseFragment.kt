@@ -106,6 +106,7 @@ class AddCourseFragment : DialogFragment() {
             //TODO: Close dialog then reload activity
             val act = activity as MainActivity
             act.reloadCourses()
+            cancelDialog()
         }
     }
 
