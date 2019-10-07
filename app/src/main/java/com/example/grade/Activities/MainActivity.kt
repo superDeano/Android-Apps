@@ -1,5 +1,6 @@
 //Class which contains the logic for the main activity
 package com.example.grade.Activities
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity() {
         R.id.menuSeeRandomGrades -> {
             showRandomGrades(); true
         }
+        R.id.action_deleteAllCourses -> {
+            deleteAllCourses(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
-       reloadCourses()
+        reloadCourses()
         addListenerOnFloatingButton()
     }
 
@@ -76,10 +80,8 @@ class MainActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (dy < 0 && !fab.isShown())
-                    fab.show()
-                else if (dy > 0 && fab.isShown())
-                    fab.hide()
+                if (dy < 0 && !fab.isShown()) fab.show()
+                else if (dy > 0 && fab.isShown()) fab.hide()
             }
 
         })
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun reloadCourses(){
+    fun reloadCourses() {
         viewManager = LinearLayoutManager(this)
         viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())
 
@@ -109,6 +111,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
         return dbHelper.getAllCourses()
+    }
+
+    private fun deleteAllCourses() {
+        dbHelper.deleteAllCourses()
+        reloadCourses()
     }
 
 }

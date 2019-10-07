@@ -17,10 +17,10 @@ class CheckingInputHelper {
             }
             val name = nameTextField.text.toString().toCharArray()
             for (letter in name) {
-                if (!Character.isLetter(letter) && letter != ' '){
+                if (!Character.isLetter(letter) && letter != ' ') {
                     nameLayout.error = "Please enter a better name"
                     return false
-                }else{
+                } else {
                     nameLayout.error = ""
                 }
             }

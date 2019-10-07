@@ -3,6 +3,7 @@ package com.example.grade
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
@@ -14,15 +15,13 @@ import kotlin.collections.ArrayList
 
 
 class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
-    context, Config.DATABASE_NAME.toString(), null,
-    Config.DATABASE_VERSION.value.toInt()
+    context, Config.DATABASE_NAME.toString(), null, Config.DATABASE_VERSION.value.toInt()
 ) {
 
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        val CREATE_COURSE_TABLE =
-            "CREATE TABLE " + Config.TABLE_COURSE.value + "(" + Config.COLUMN_COURSE_ID.value + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Config.COLUMN_COURSE_TITLE.value + " TEXT NOT NULL, " + Config.COLUMN_COURSE_CODE.value + " TEXT NOT NULL " + ")"
+        val CREATE_COURSE_TABLE = "CREATE TABLE " + Config.TABLE_COURSE.value + "(" + Config.COLUMN_COURSE_ID.value + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Config.COLUMN_COURSE_TITLE.value + " TEXT NOT NULL, " + Config.COLUMN_COURSE_CODE.value + " TEXT NOT NULL " + ")"
 
         db?.execSQL(CREATE_COURSE_TABLE)
     }
@@ -48,12 +47,10 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
                 contentValues.put(Config.COLUMN_COURSE_CODE.value, course.courseID)
 
                 try {
-                    id =
-                        sqLiteDatabase.insertOrThrow(Config.TABLE_COURSE.value, null, contentValues)
+                    id = sqLiteDatabase.insertOrThrow(Config.TABLE_COURSE.value, null, contentValues)
                 } catch (e: SQLiteException) {
                     Log.d("Inserting Course", e.message)
-                    Toast.makeText(context, "Operation Failed " + e.message, Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(context, "Operation Failed " + e.message, Toast.LENGTH_LONG).show()
 
                 } finally {
                     sqLiteDatabase.close()
@@ -73,8 +70,7 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
 
         try {
             cursor = sqLiteDatabase.query(
-                Config.TABLE_COURSE.value, null, null, null, null,
-                null, null
+                Config.TABLE_COURSE.value, null, null, null, null, null, null
             )
 
             if (cursor != null) {
@@ -85,14 +81,12 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
                     var courseId: String
                     do {
                         id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
-                        courseName =
-                            cursor.getString(
-                                cursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value)
-                            )
-                        courseId =
-                            cursor.getString(
-                                cursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value)
-                            )
+                        courseName = cursor.getString(
+                            cursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value)
+                        )
+                        courseId = cursor.getString(
+                            cursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value)
+                        )
                         courses.add(CustomCourse(id.toLong(), courseName, courseId))
 
                     } while (cursor.moveToNext())
@@ -105,11 +99,47 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
             Log.d("Getting Courses", e.message)
             Toast.makeText(context, "Can't get Courses", Toast.LENGTH_LONG).show()
         } finally {
-//            cursor.close()
             sqLiteDatabase.close()
 
         }
         return null
+    }
+
+
+    fun deleteAllCourses(): Boolean {
+        var deletedEverything = false
+        val dataBase = writableDatabase
+
+
+        try {
+            dataBase.delete(Config.TABLE_COURSE.value, null, null)
+            val count = DatabaseUtils.queryNumEntries(dataBase, Config.TABLE_COURSE.value)
+            if (count.toInt() == 0) {
+                deletedEverything = true
+            }
+        } catch (e: SQLiteException) {
+            Log.d("Deleting All Course", e.message)
+        } finally {
+            dataBase.close()
+        }
+
+        return deletedEverything
+    }
+
+    fun deleteCourseById(courseID: String): Long {
+        var courseIdInDataBase: Long = -1
+        val dataBase = writableDatabase
+
+
+        try {
+            courseIdInDataBase = dataBase.delete(Config.TABLE_COURSE.value, Config.COLUMN_COURSE_CODE.value + " = ? ", arrayOf(courseID)).toLong()
+        } catch (e: SQLiteException) {
+            Log.d("deleting a Course", e.message)
+        } finally {
+            dataBase.close()
+        }
+        return courseIdInDataBase
+
     }
 
 
