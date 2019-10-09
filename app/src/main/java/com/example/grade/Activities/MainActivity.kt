@@ -141,4 +141,23 @@ class MainActivity : AppCompatActivity() {
         reloadCourses()
     }
 
+    override fun onDestroy() {
+        fab.hide()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        fab.hide()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        fab.hide()
+        super.onStop()
+    }
+
+    override fun onResume() {
+        fab.show()
+        super.onResume()
+    }
 }

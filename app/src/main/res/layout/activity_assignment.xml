@@ -60,6 +60,7 @@
         android:src="@drawable/add_white"
         android:layout_marginRight="21dp"
         android:layout_marginBottom="22dp"
+        android:backgroundTint="#FF61A2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

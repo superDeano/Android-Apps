@@ -108,4 +108,19 @@ class AssignmentActivity : AppCompatActivity() {
 
         }
     }
+
+    override fun onDestroy() {
+        floatingActionButton.hide()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        floatingActionButton.hide()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        floatingActionButton.hide()
+        super.onStop()
+    }
 }
