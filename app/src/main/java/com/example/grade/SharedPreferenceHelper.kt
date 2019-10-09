@@ -23,12 +23,13 @@ class SharedPreferenceHelper(context: Context) {
         saveProfileName(profile.name)
         saveProfileID(profile.id)
         saveProfileAge(profile.age)
+        saveProfileUserName(profile.userName)
 
     }
 
     //Returns a profile with the information from SharedPreferences
     fun getProfile(): Profile {
-        val profile = Profile(getProfileName(), getAge(), getProfileID())
+        val profile = Profile(getProfileName(),getProfileUserName(), getProfileAge(), getProfileID())
         return profile
     }
 
@@ -52,7 +53,7 @@ class SharedPreferenceHelper(context: Context) {
     }
 
     //Internal function to get the age
-    private fun getAge(): String? {
+    private fun getProfileAge(): String? {
         return sharedPreferences.getString("profileAge", null)
     }
 
@@ -63,6 +64,17 @@ class SharedPreferenceHelper(context: Context) {
         editor.commit()
     }
 
+    private fun getProfileUserName(): String? {
+        return sharedPreferences.getString("profileUserName", null)
+    }
+
+    private fun saveProfileUserName(userName: String?) {
+        val editor = sharedPreferences.edit()
+        editor.putString("profileUserName", userName)
+        editor.commit()
+    }
+
+
     //Internal function to get the ID
     private fun getProfileID(): String? {
         return sharedPreferences.getString("profileId", null)
@@ -70,7 +82,7 @@ class SharedPreferenceHelper(context: Context) {
 
     //To check if there is any information saved in SharedPreferences
     fun noInfoSaved(): Boolean {
-        if (getAge() == null && getProfileName() == null && getProfileID() == null) {
+        if (getProfileAge() == null && getProfileName() == null && getProfileID() == null) {
             return true
         }
         return false
@@ -79,8 +91,6 @@ class SharedPreferenceHelper(context: Context) {
 
     //Deleting all the information from SharedPreferences
     fun deleteAllSavedInfo() {
-        sharedPreferences.edit()
-            .clear()
-            .commit()
+        sharedPreferences.edit().clear().commit()
     }
 }

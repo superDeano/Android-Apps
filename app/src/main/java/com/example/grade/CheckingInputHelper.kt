@@ -27,6 +27,15 @@ class CheckingInputHelper {
             return true
         }
 
+        fun checkTextFieldIsNotEmpty(textfield: TextInputEditText, textLayout: TextInputLayout): Boolean {
+            if (textfield.text.toString() == "") {
+                textLayout.error = "Enter Something!"
+                return false
+            } else {
+                textLayout.error = ""
+                return true
+            }
+        }
     }
 
 

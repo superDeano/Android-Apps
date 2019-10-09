@@ -6,4 +6,4 @@ package com.example.grade.Classes
  *The line below contains the properties of the class, the constructor
  *
  * */
-class Profile constructor(var name: String?, var age: String?, var id: String?)
+class Profile constructor(var name: String?, var userName: String?, var age: String?, var id: String?)

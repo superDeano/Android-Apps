@@ -26,6 +26,8 @@ class profileActivity : AppCompatActivity() {
     private lateinit var ageTextField: TextInputEditText
     private lateinit var idTFLayout: TextInputLayout
     private lateinit var idTextField: TextInputEditText
+    private lateinit var userNameTF: TextInputEditText
+    private lateinit var userNameTFLayout: TextInputLayout
     private lateinit var saveProfileButt: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +51,8 @@ class profileActivity : AppCompatActivity() {
         saveProfileButt = findViewById(R.id.saveProfileButt)
         nameTFLayout = findViewById(R.id.nameTFLayout)
         ageTFLayout = findViewById(R.id.ageTFLayout)
+        userNameTF = findViewById(R.id.userNameTF)
+        userNameTFLayout = findViewById(R.id.userNameTFLayout)
         idTFLayout = findViewById(R.id.idTFLayout)
         sharedPreference = SharedPreferenceHelper(this)
     }
@@ -76,6 +80,7 @@ class profileActivity : AppCompatActivity() {
         nameTextField.isEnabled = true
         ageTextField.isEnabled = true
         idTextField.isEnabled = true
+        userNameTF.isEnabled = true
     }
 
     //Essentially enabling view mode
@@ -83,6 +88,7 @@ class profileActivity : AppCompatActivity() {
         saveProfileButt.isVisible = false
         nameTextField.isEnabled = false
         ageTextField.isEnabled = false
+        userNameTF.isEnabled = false
         idTextField.isEnabled = false
     }
 
@@ -93,6 +99,7 @@ class profileActivity : AppCompatActivity() {
             val profile = sharedPreference.getProfile()
             nameTextField.setText(profile.name)
             ageTextField.setText(profile.age)
+            userNameTF.setText(profile.userName)
             idTextField.setText(profile.id)
         }
         // No profile data, we enable edit mode
@@ -105,29 +112,24 @@ class profileActivity : AppCompatActivity() {
     private fun saveProfileInfo() {
 
         //Makes sure that all the information enterred is correct
-        if (nameFormatIsCorrect() && ageFormatIsCorrect() && idFormatIsCorrect()) {
+        if (nameFormatIsCorrect() && CheckingInputHelper.checkTextFieldIsNotEmpty(userNameTF, userNameTFLayout) && ageFormatIsCorrect() && idFormatIsCorrect()) {
 
             //Create a profile object
             val profile = Profile(
-                nameTextField.text.toString(),
-                ageTextField.text.toString(),
-                idTextField.text.toString()
+                nameTextField.text.toString(), userNameTF.text.toString(), ageTextField.text.toString(), idTextField.text.toString()
             )
             //Saves the profile information
             sharedPreference.saveProfileInfo(profile)
             //Tell the user his profile was saved
             Toast.makeText(
-                applicationContext,
-                "Profile Info Saved", Toast.LENGTH_SHORT
+                applicationContext, "Profile Info Saved", Toast.LENGTH_SHORT
             ).show()
 
             //Then go to view mode
             disableEditMode()
         } else {
             Toast.makeText(
-                applicationContext,
-                "One or more fields is incorrect",
-                Toast.LENGTH_SHORT
+                applicationContext, "One or more fields is incorrect", Toast.LENGTH_SHORT
             )
         }
     }
@@ -136,6 +138,7 @@ class profileActivity : AppCompatActivity() {
     private fun clearTextFields() {
         nameTextField.text?.clear()
         ageTextField.text?.clear()
+        userNameTF.text?.clear()
         idTextField.text?.clear()
     }
 
@@ -192,9 +195,7 @@ class profileActivity : AppCompatActivity() {
         sharedPreference.deleteAllSavedInfo()
         loadProfileInfo()
         Toast.makeText(
-            applicationContext,
-            "All Profile Info Deleted, Please enter new information",
-            Toast.LENGTH_LONG
+            applicationContext, "All Profile Info Deleted, Please enter new information", Toast.LENGTH_LONG
         )
     }
 }

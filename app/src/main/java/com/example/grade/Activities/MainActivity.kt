@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.DataBaseHelper
 import com.example.grade.Fragments.AddCourseFragment
 import com.example.grade.R
+import com.example.grade.SharedPreferenceHelper
 import com.example.grade.rvAdapters.CustomCoursesRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -21,16 +23,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var welcome_Text: TextView
     private lateinit var fab: FloatingActionButton
     lateinit var dbHelper: DataBaseHelper
+    lateinit var sharedPreference: SharedPreferenceHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dbHelper = DataBaseHelper(applicationContext)
         initView()
+        loadProfileUsername()
 
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        loadProfileUsername()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -71,6 +82,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
+        welcome_Text = findViewById(R.id.welcome_Text)
+        sharedPreference = SharedPreferenceHelper(applicationContext)
         reloadCourses()
         addListenerOnFloatingButton()
     }
@@ -85,6 +98,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun loadProfileUsername() {
+        if (sharedPreference.getProfile() == null || sharedPreference.getProfile().userName == "" || sharedPreference.getProfile().userName == null) {
+            welcome_Text.setText("Average Grade")
+        } else {
+            var userName = sharedPreference.getProfile().userName
+            userName += "'s average grade"
+            welcome_Text.setText(userName)
+        }
     }
 
     private fun addListenerOnFloatingButton() {
