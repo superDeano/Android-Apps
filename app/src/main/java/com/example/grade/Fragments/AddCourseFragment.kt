@@ -39,9 +39,7 @@ class AddCourseFragment : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.add_course_fragment, container, false)
         initView(view)
@@ -98,9 +96,7 @@ class AddCourseFragment : DialogFragment() {
         if (formatInfoEnterredIsCorrect()) {
             dbHelper!!.insertCourse(
                 CustomCourse(
-                    -1,
-                    addCourseNameTF.text.toString(),
-                    addCourseIdTF.text.toString()
+                    -1, addCourseNameTF.text.toString(), addCourseIdTF.text.toString()
                 )
             )
             //TODO: Close dialog then reload activity
@@ -112,8 +108,7 @@ class AddCourseFragment : DialogFragment() {
 
     private fun formatInfoEnterredIsCorrect(): Boolean {
         return (CheckingInputHelper.checkNameFormat(
-            addCourseNameTF,
-            addCourseNameLayout
+            addCourseNameTF, addCourseNameLayout
         ) && CheckingInputHelper.checkNameFormat(addCourseIdTF, addCourseIdLayout))
     }
 }

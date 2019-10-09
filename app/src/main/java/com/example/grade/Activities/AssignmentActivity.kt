@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.DataBaseHelper
+import com.example.grade.Fragments.AddAssFragment
 import com.example.grade.R
 import com.example.grade.rvAdapters.AssignmentsRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,9 +32,8 @@ class AssignmentActivity : AppCompatActivity() {
         dbHelper = DataBaseHelper(applicationContext)
         getCourseFromIntent()
         initViews()
+        loadCourseInfoAsTitle()
 
-        courseName.text = course.courseName
-        courseID.text = course.courseID
         animateFab()
 
     }
@@ -59,13 +59,21 @@ class AssignmentActivity : AppCompatActivity() {
     fun initViews() {
         courseName = findViewById(R.id.customCourseNameInCourseActivity)
         courseID = findViewById(R.id.customCourseIdInCourseActivity)
+        floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)
+
+        loadAssignments()
+        addListenerOnFab()
+    }
+
+    private fun loadCourseInfoAsTitle() {
+        courseName.text = course.courseName
+        courseID.text = course.courseID
+    }
+
+    private fun loadAssignments() {
         viewManager = LinearLayoutManager(this)
         viewAdapter = AssignmentsRVAdapter(null)
         assignmentRV = findViewById(R.id.customAssignmentRV)
-        floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)
-
-        floatingActionButton.setBackgroundColor(1)
-
         assignmentRV.apply {
             layoutManager = viewManager
             adapter = viewAdapter
@@ -89,5 +97,15 @@ class AssignmentActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun addListenerOnFab() {
+        floatingActionButton.setOnClickListener {
+            val addAssDialog = AddAssFragment()
+            addAssDialog.setFAB(floatingActionButton)
+            floatingActionButton.hide()
+            addAssDialog.show(supportFragmentManager, "Insert Assignment")
+
+        }
     }
 }
