@@ -68,49 +68,6 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         return id
     }
 
-    //TODO: Retire this function
-//    fun getAllCourses(): ArrayList<CustomCourse>? {
-//        val sqLiteDatabase = readableDatabase
-//        val cursor: Cursor
-//        val courses: ArrayList<CustomCourse>
-//
-//        try {
-//            cursor = sqLiteDatabase.query(
-//                Config.TABLE_COURSE.value, null, null, null, null, null, null
-//            )
-//
-//            if (cursor != null) {
-//                if (cursor.moveToFirst()) {
-//                    courses = ArrayList()
-//                    var id: Int
-//                    var courseName: String
-//                    var courseId: String
-//                    do {
-//                        id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
-//                        courseName = cursor.getString(
-//                            cursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value)
-//                        )
-//                        courseId = cursor.getString(
-//                            cursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value)
-//                        )
-//                        courses.add(CustomCourse(id.toLong(), courseName, courseId, null))
-//
-//                    } while (cursor.moveToNext())
-//
-//                    return courses
-//                }
-//            }
-//
-//        } catch (e: Exception) {
-//            Log.d("Getting Courses", e.message)
-//            Toast.makeText(context, "Can't get Courses", Toast.LENGTH_LONG).show()
-//        } finally {
-//            sqLiteDatabase.close()
-//
-//        }
-//        return null
-//    }
-
 
     fun deleteAllCourses(): Boolean {
         var deletedEverything = false

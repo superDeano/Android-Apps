@@ -24,9 +24,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var welcome_Text: TextView
+    private lateinit var totalAverageTextView: TextView
     private lateinit var fab: FloatingActionButton
     lateinit var dbHelper: DataBaseHelper
     lateinit var sharedPreference: SharedPreferenceHelper
+    private lateinit var courses: ArrayList<CustomCourse>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
         R.id.action_dropDataBase -> {
             dbHelper.deleteDb()
-           reloadCourses()
+            reloadCourses()
             true
         }
 
@@ -90,6 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         fab = findViewById(R.id.floatingAddCustomCourseButton)
         welcome_Text = findViewById(R.id.welcome_Text)
+        totalAverageTextView = findViewById(R.id.averageCourseGradeTextView)
         sharedPreference = SharedPreferenceHelper(applicationContext)
         reloadCourses()
         addListenerOnFloatingButton()
@@ -132,7 +135,11 @@ class MainActivity : AppCompatActivity() {
     fun reloadCourses() {
         viewManager = LinearLayoutManager(this)
         viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())
-
+        if (calculateAllCoursesAverage() == "N/A"){
+        totalAverageTextView.text = calculateAllCoursesAverage()
+        }else{
+            totalAverageTextView.text = calculateAllCoursesAverage()+"%"
+        }
         recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
             layoutManager = viewManager
             adapter = viewAdapter
@@ -140,14 +147,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO : Implement this
-    fun calculateAllCoursesAverage() {
-
+    fun calculateAllCoursesAverage(): String {
+        var sum = 0
+        if (courses.size != 0){
+        for (course in courses) {
+            if (course.courseAverage != null) {
+                sum += course.courseAverage!!.toInt()
+            }
+        }
+        sum /= courses.size
+        return sum.toString()}else return "N/A"
     }
 
 
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
-//        return dbHelper.getAllCourses()
-        return dbHelper.getEverything()
+        courses = dbHelper.getEverything()
+        return courses
     }
 
     private fun deleteAllCourses() {

@@ -11,7 +11,7 @@ class CustomCourse constructor(val id: Long, var courseName: String, var courseC
         courseAverage = calculateAverageGrade()
     }
 
-    fun calculateAverageGrade(): String? {
+    private fun calculateAverageGrade(): String? {
         if (assignments == null) {
             return "0"
         } else {
