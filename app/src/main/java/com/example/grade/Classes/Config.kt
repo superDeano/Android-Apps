@@ -1,4 +1,4 @@
-package com.example.grade
+package com.example.grade.Classes
 
 enum class Config(val value: String) {
 

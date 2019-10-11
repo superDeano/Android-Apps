@@ -17,6 +17,7 @@
         </activity>
         <activity
             android:name=".Activities.profileActivity"
+            android:label="Profile"
             android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -24,11 +25,13 @@
         </activity>
         <activity
             android:name=".Activities.GradeActivity"
+            android:label="Random Grades"
             android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grade.Activities.MainActivity" />
         </activity>
+
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

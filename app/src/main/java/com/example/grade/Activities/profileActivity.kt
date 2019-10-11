@@ -10,10 +10,10 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.example.grade.CheckingInputHelper
+import com.example.grade.Helpers.CheckingInputHelper
 import com.example.grade.Classes.Profile
 import com.example.grade.R
-import com.example.grade.SharedPreferenceHelper
+import com.example.grade.Helpers.SharedPreferenceHelper
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

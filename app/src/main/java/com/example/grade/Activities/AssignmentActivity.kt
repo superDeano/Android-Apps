@@ -8,8 +8,9 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
-import com.example.grade.DataBaseHelper
+import com.example.grade.Helpers.DataBaseHelper
 import com.example.grade.Fragments.AddAssFragment
 import com.example.grade.R
 import com.example.grade.rvAdapters.AssignmentsRVAdapter
@@ -22,18 +23,19 @@ class AssignmentActivity : AppCompatActivity() {
     private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var course: CustomCourse
     private lateinit var assignmentRV: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    lateinit var assignments: ArrayList<Assignment>
     lateinit var dbHelper: DataBaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_assignment)
         dbHelper = DataBaseHelper(applicationContext)
+
         getCourseFromIntent()
         initViews()
         loadCourseInfoAsTitle()
-
         animateFab()
 
     }
@@ -51,28 +53,49 @@ class AssignmentActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun getCourseFromIntent() {
+    override fun onDestroy() {
+        floatingActionButton.hide()
+        super.onDestroy()
+    }
 
+    override fun onPause() {
+        floatingActionButton.hide()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        floatingActionButton.hide()
+        super.onStop()
+    }
+
+
+    fun getCourseFromIntent() {
         course = intent.extras?.get("COURSE") as CustomCourse
     }
 
     fun initViews() {
+        this.title = course.courseName
         courseName = findViewById(R.id.customCourseNameInCourseActivity)
         courseID = findViewById(R.id.customCourseIdInCourseActivity)
         floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)
-
+        assignments = ArrayList()
         loadAssignments()
         addListenerOnFab()
     }
 
     private fun loadCourseInfoAsTitle() {
         courseName.text = course.courseName
-        courseID.text = course.courseID
+        courseID.text = course.courseCode
     }
 
     private fun loadAssignments() {
+
+        if (course.assignments != null) {
+            assignments = course.assignments!!
+        }
+
         viewManager = LinearLayoutManager(this)
-        viewAdapter = AssignmentsRVAdapter(null)
+        viewAdapter = AssignmentsRVAdapter(assignments)
         assignmentRV = findViewById(R.id.customAssignmentRV)
         assignmentRV.apply {
             layoutManager = viewManager
@@ -82,7 +105,7 @@ class AssignmentActivity : AppCompatActivity() {
 
 
     fun deleteCourse() {
-        dbHelper.deleteCourseById(course.courseID)
+        dbHelper.deleteCourseById(course.courseCode)
         val goBackToCoursesList = Intent(this, MainActivity::class.java)
         startActivity(goBackToCoursesList)
     }
@@ -105,22 +128,10 @@ class AssignmentActivity : AppCompatActivity() {
             addAssDialog.setFAB(floatingActionButton)
             floatingActionButton.hide()
             addAssDialog.show(supportFragmentManager, "Insert Assignment")
+            addAssDialog.setCourseId(course.id.toString())
 
         }
     }
 
-    override fun onDestroy() {
-        floatingActionButton.hide()
-        super.onDestroy()
-    }
 
-    override fun onPause() {
-        floatingActionButton.hide()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        floatingActionButton.hide()
-        super.onStop()
-    }
 }

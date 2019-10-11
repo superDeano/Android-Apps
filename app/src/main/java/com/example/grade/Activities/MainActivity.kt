@@ -11,10 +11,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Classes.CustomCourse
-import com.example.grade.DataBaseHelper
+import com.example.grade.Helpers.DataBaseHelper
 import com.example.grade.Fragments.AddCourseFragment
 import com.example.grade.R
-import com.example.grade.SharedPreferenceHelper
+import com.example.grade.Helpers.SharedPreferenceHelper
 import com.example.grade.rvAdapters.CustomCoursesRVAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -58,11 +58,18 @@ class MainActivity : AppCompatActivity() {
         R.id.action_deleteAllCourses -> {
             deleteAllCourses(); true
         }
+        R.id.action_dropDataBase -> {
+            dbHelper.deleteDb()
+           reloadCourses()
+            true
+        }
+
         else -> super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {
         super.onStart()
+        reloadCourses()
         fab.show()
         animateFloatingButton()
     }
@@ -132,9 +139,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //TODO : Implement this
+    fun calculateAllCoursesAverage() {
+
+    }
+
+
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
 //        return dbHelper.getAllCourses()
-    return dbHelper.getEverything()
+        return dbHelper.getEverything()
     }
 
     private fun deleteAllCourses() {
@@ -159,6 +172,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         fab.show()
+        reloadCourses()
         super.onResume()
     }
 }

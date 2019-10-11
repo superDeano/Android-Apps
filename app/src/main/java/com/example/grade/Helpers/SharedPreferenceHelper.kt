@@ -1,4 +1,4 @@
-package com.example.grade
+package com.example.grade.Helpers
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

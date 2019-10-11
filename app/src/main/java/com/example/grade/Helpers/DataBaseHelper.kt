@@ -1,4 +1,4 @@
-package com.example.grade
+package com.example.grade.Helpers
 
 import android.content.ContentValues
 import android.content.Context
@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
+import com.example.grade.Classes.Config
 import java.lang.Exception
 import kotlin.collections.ArrayList
 
@@ -49,7 +50,7 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
 
                 val contentValues = ContentValues()
                 contentValues.put(Config.COLUMN_COURSE_TITLE.value, course.courseName)
-                contentValues.put(Config.COLUMN_COURSE_CODE.value, course.courseID)
+                contentValues.put(Config.COLUMN_COURSE_CODE.value, course.courseCode)
 
                 try {
                     id = sqLiteDatabase.insertOrThrow(Config.TABLE_COURSE.value, null, contentValues)
@@ -68,47 +69,47 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
     }
 
     //TODO: Retire this function
-    fun getAllCourses(): ArrayList<CustomCourse>? {
-        val sqLiteDatabase = readableDatabase
-        val cursor: Cursor
-        val courses: ArrayList<CustomCourse>
-
-        try {
-            cursor = sqLiteDatabase.query(
-                Config.TABLE_COURSE.value, null, null, null, null, null, null
-            )
-
-            if (cursor != null) {
-                if (cursor.moveToFirst()) {
-                    courses = ArrayList()
-                    var id: Int
-                    var courseName: String
-                    var courseId: String
-                    do {
-                        id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
-                        courseName = cursor.getString(
-                            cursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value)
-                        )
-                        courseId = cursor.getString(
-                            cursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value)
-                        )
-                        courses.add(CustomCourse(id.toLong(), courseName, courseId, null))
-
-                    } while (cursor.moveToNext())
-
-                    return courses
-                }
-            }
-
-        } catch (e: Exception) {
-            Log.d("Getting Courses", e.message)
-            Toast.makeText(context, "Can't get Courses", Toast.LENGTH_LONG).show()
-        } finally {
-            sqLiteDatabase.close()
-
-        }
-        return null
-    }
+//    fun getAllCourses(): ArrayList<CustomCourse>? {
+//        val sqLiteDatabase = readableDatabase
+//        val cursor: Cursor
+//        val courses: ArrayList<CustomCourse>
+//
+//        try {
+//            cursor = sqLiteDatabase.query(
+//                Config.TABLE_COURSE.value, null, null, null, null, null, null
+//            )
+//
+//            if (cursor != null) {
+//                if (cursor.moveToFirst()) {
+//                    courses = ArrayList()
+//                    var id: Int
+//                    var courseName: String
+//                    var courseId: String
+//                    do {
+//                        id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
+//                        courseName = cursor.getString(
+//                            cursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value)
+//                        )
+//                        courseId = cursor.getString(
+//                            cursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value)
+//                        )
+//                        courses.add(CustomCourse(id.toLong(), courseName, courseId, null))
+//
+//                    } while (cursor.moveToNext())
+//
+//                    return courses
+//                }
+//            }
+//
+//        } catch (e: Exception) {
+//            Log.d("Getting Courses", e.message)
+//            Toast.makeText(context, "Can't get Courses", Toast.LENGTH_LONG).show()
+//        } finally {
+//            sqLiteDatabase.close()
+//
+//        }
+//        return null
+//    }
 
 
     fun deleteAllCourses(): Boolean {
@@ -162,8 +163,8 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
 
             val contentValues = ContentValues()
             contentValues.put(Config.COLUMN_ASS_TITLE.value, assignment.assignmentTitle)
-            contentValues.put(Config.COLUMN_ASS_GRADE.value, assignment.digitGrade.toInt())
-            contentValues.put(Config.COLUMN_ASS_COURSE_ID.value, assignment.courseID!!.toInt())
+            contentValues.put(Config.COLUMN_ASS_GRADE.value, assignment.digitGrade)
+            contentValues.put(Config.COLUMN_ASS_COURSE_ID.value, assignment.courseId)
 
             try {
                 id = sqLiteDatabase.insertOrThrow(Config.TABLE_ASS.value, null, contentValues)
@@ -221,21 +222,23 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
                     val courseTitle = courseCursor.getString(courseCursor.getColumnIndex(Config.COLUMN_COURSE_TITLE.value))
                     val courseId = courseCursor.getInt(courseCursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
                     val courseCode = courseCursor.getString(courseCursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value))
-                    
-                    val assCursor = sqLiteDatabase.query(Config.TABLE_ASS.value, null, Config.COLUMN_ASS_COURSE_ID.value+ " = ? ", arrayOf(courseId.toString()), null, null, null)
+
+                    val assCursor = sqLiteDatabase.query(Config.TABLE_ASS.value, null, Config.COLUMN_ASS_COURSE_ID.value + " = ? ", arrayOf(courseId.toString()), null, null, null)
 
                     if (assCursor.moveToFirst()) {
+                        assignments = ArrayList()
 
-                        do {
+                        while (!assCursor.isAfterLast) {
                             val assTitle = assCursor.getString(assCursor.getColumnIndex(Config.COLUMN_ASS_TITLE.value))
                             val assGrade = assCursor.getString(assCursor.getColumnIndex(Config.COLUMN_ASS_GRADE.value))
-                            assignments = ArrayList()
 
 
                             assignments.add(
                                 Assignment(assTitle, assGrade, courseId.toString())
                             )
-                        } while (assCursor.moveToNext())
+                            assCursor.moveToNext()
+                        }
+
                         courses.add(CustomCourse(courseId.toLong(), courseTitle, courseCode, assignments))
                     }
                     // Assignments Empty for that course
@@ -260,5 +263,8 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         return courses
     }
 
+    fun deleteDb() {
+        context?.deleteDatabase(Config.DATABASE_NAME.value)
+    }
 
 }

@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.example.grade.Activities.MainActivity
-import com.example.grade.CheckingInputHelper
+import com.example.grade.Helpers.CheckingInputHelper
 import com.example.grade.Classes.CustomCourse
-import com.example.grade.DataBaseHelper
+import com.example.grade.Helpers.DataBaseHelper
 
 import com.example.grade.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton

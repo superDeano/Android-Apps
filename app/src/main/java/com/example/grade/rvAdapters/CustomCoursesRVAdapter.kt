@@ -36,7 +36,7 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
         if (customCourses != null) {
             val customCourse = customCourses!![position]
             holder.customCourseName.text = customCourse.courseName
-            holder.customCourseIdTV.text = customCourse.courseID
+            holder.customCourseIdTV.text = customCourse.courseCode
             holder.customCourseAverageGrade.text //TODO: fix this
 
             holder.cardview.setOnClickListener {

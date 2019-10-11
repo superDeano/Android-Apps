@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
-import com.example.grade.DataBaseHelper
+import com.example.grade.Activities.AssignmentActivity
+import com.example.grade.Classes.Assignment
+import com.example.grade.Helpers.CheckingInputHelper
+import com.example.grade.Helpers.DataBaseHelper
 import com.example.grade.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -23,6 +26,7 @@ class AddAssFragment : DialogFragment() {
     private lateinit var addAssGradeLayout: TextInputLayout
     private lateinit var cancelButt: Button
     private lateinit var addAssButt: Button
+    private lateinit var courseId: String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +38,10 @@ class AddAssFragment : DialogFragment() {
 
     fun setFAB(fab: FloatingActionButton) {
         this.fab = fab
+    }
+
+    fun setCourseId(id: String) {
+        this.courseId = id
     }
 
     override fun onAttach(context: Context) {
@@ -60,12 +68,37 @@ class AddAssFragment : DialogFragment() {
 
     }
 
+    private fun addAssignment() {
+        if (CheckingInputHelper.checkNameFormat(addAssignmentNameTF, addAssignmentNameLayout) && CheckingInputHelper.checkPositiveIntegersOnly(addAssGradeTF, addAssGradeLayout)) {
+            val assName = addAssignmentNameTF.text.toString()
+            val assGrade = addAssGradeTF.text.toString()
+            val assignment = Assignment(assName, assGrade, courseId)
+            dbHelper!!.addAssignmentToCourse(assignment)
+            cancelDialog()
+            reloadingAssignmentList(assignment)
+        }
+    }
+
     private fun addListenersOnButtons() {
         addAssButt.setOnClickListener {
-            //            addAssignment()
+            addAssignment()
         }
         cancelButt.setOnClickListener {
             cancelDialog()
         }
+    }
+
+
+    private fun reloadingAssignmentList(assignment: Assignment) {
+        val assignmentActivity = activity as AssignmentActivity
+        var assignments = assignmentActivity.assignments
+
+        if (assignments == null) {
+            assignments = ArrayList()
+           assignments.add(assignment)
+        }else{
+            assignments.add(assignment)
+        }
+        assignmentActivity.viewAdapter.notifyItemInserted(assignmentActivity.viewAdapter.itemCount + 1)
     }
 }
