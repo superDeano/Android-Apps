@@ -94,11 +94,7 @@ class AddCourseFragment : DialogFragment() {
 
     private fun addCourse() {
         if (formatInfoEnterredIsCorrect()) {
-            dbHelper!!.insertCourse(
-                CustomCourse(
-                    -1, addCourseNameTF.text.toString(), addCourseIdTF.text.toString()
-                )
-            )
+            dbHelper!!.insertCourse(CustomCourse(-1, addCourseNameTF.text.toString(), addCourseIdTF.text.toString(), null))
             //TODO: Close dialog then reload activity
             val act = activity as MainActivity
             act.reloadCourses()

@@ -13,8 +13,8 @@ enum class Config(val value: String) {
 
     //For the Assignments Table
     TABLE_ASS("assignments"),
-    COLUMN_ASS_ID("_id"),
-    COLUMN_ASS_COURSE_ID("courseID"),
+    COLUMN_ASS_ID("ass_id"),
+    COLUMN_ASS_COURSE_ID("courseid"),
     COLUMN_ASS_TITLE("title"),
     COLUMN_ASS_GRADE("grade")
 }

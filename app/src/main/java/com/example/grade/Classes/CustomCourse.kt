@@ -3,13 +3,13 @@ package com.example.grade.Classes
 import java.io.Serializable
 
 
-class CustomCourse constructor(val id: Long, var courseName: String, var courseID: String) :
-    Serializable {
+class CustomCourse constructor(val id: Long, var courseName: String, var courseID: String, var assignments: ArrayList<Assignment>?) : Serializable {
 //    var courseAverage: String?
 
-    init {
+
+//    init {
 //        courseAverage = calculateAverageGrade()
-    }
+//    }
 
 //    fun calculateAverageGrade(): String? {
 //        if (assignments == null) {
@@ -24,3 +24,8 @@ class CustomCourse constructor(val id: Long, var courseName: String, var courseI
 //        }
 //    }
 }
+
+
+//  val selectCityQuery = "SELECT  * FROM " + TABLE_USER_CITY + " WHERE " + KEY_ID + " = " + userModel.getIds()
+//val cCity = db.rawQuery(selectCityQuery, null)
+//

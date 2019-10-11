@@ -133,7 +133,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
-        return dbHelper.getAllCourses()
+//        return dbHelper.getAllCourses()
+    return dbHelper.getEverything()
     }
 
     private fun deleteAllCourses() {

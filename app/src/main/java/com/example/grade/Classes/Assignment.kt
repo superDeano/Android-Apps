@@ -4,7 +4,7 @@ package com.example.grade.Classes
 import java.io.Serializable
 import kotlin.random.Random
 
-class Assignment constructor(val assignmentTitle: String, val digitGrade: String) : Serializable {
+class Assignment constructor(val assignmentTitle: String, val digitGrade: String, val courseID: String?) : Serializable {
 
     private var letterGrade = gradeLetter()
     var grade: String = digitGrade
@@ -16,12 +16,12 @@ class Assignment constructor(val assignmentTitle: String, val digitGrade: String
         fun generateRandomAssignment(id: Int): Assignment {
             //for readability purposes
             val grade = Random.nextInt(1, 100).toString()
-            return Assignment("Assignment $id", grade)
+            return Assignment("Assignment $id", grade, null)
         }
 
         //When no assignments for a course
         fun generateNoAssignment(): Assignment {
-            return Assignment("No Assignments", "")
+            return Assignment("No Assignments", "", null)
         }
 
     }

@@ -29,8 +29,7 @@ class SharedPreferenceHelper(context: Context) {
 
     //Returns a profile with the information from SharedPreferences
     fun getProfile(): Profile {
-        val profile = Profile(getProfileName(),getProfileUserName(), getProfileAge(), getProfileID())
-        return profile
+        return Profile(getProfileName(), getProfileUserName(), getProfileAge(), getProfileID())
     }
 
     //Internal function to save the name
