@@ -16,6 +16,11 @@ import com.example.grade.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+/*
+* Class for the logic behind the adding of Assignments dialog
+*
+* */
+
 
 class AddAssFragment : DialogFragment() {
     private var dbHelper: DataBaseHelper? = null
@@ -36,6 +41,7 @@ class AddAssFragment : DialogFragment() {
         return dialogView
     }
 
+    //To get the floating action which called the dialog so it can be animated
     fun setFAB(fab: FloatingActionButton) {
         this.fab = fab
     }
@@ -69,7 +75,11 @@ class AddAssFragment : DialogFragment() {
     }
 
     private fun addAssignment() {
-        if (CheckingInputHelper.checkNameFormat(addAssignmentNameTF, addAssignmentNameLayout) && CheckingInputHelper.checkPositiveIntegersOnly(addAssGradeTF, addAssGradeLayout)) {
+        // Making sure the stuff entered are legit
+        if (CheckingInputHelper.checkTextFieldIsNotEmpty(addAssignmentNameTF, addAssignmentNameLayout) && CheckingInputHelper.checkPositiveIntegersOnly(addAssGradeTF, addAssGradeLayout)) {
+
+            //Clean the digit being entered
+            CheckingInputHelper.cleanIntergers(addAssGradeTF)
             val assName = addAssignmentNameTF.text.toString()
             val assGrade = addAssGradeTF.text.toString()
             val assignment = Assignment(assName, assGrade, courseId)
@@ -89,6 +99,7 @@ class AddAssFragment : DialogFragment() {
     }
 
 
+    //If an assignment is added, it goes to the arraylist in the assignment activity for quicker loading
     private fun reloadingAssignmentList(assignment: Assignment) {
         val assignmentActivity = activity as AssignmentActivity
         var assignments = assignmentActivity.assignments

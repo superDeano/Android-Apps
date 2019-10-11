@@ -20,7 +20,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-
+/*
+* Class responsible for the logic behind the adding a new course dialog fragment
+* */
 class AddCourseFragment : DialogFragment() {
     private lateinit var addCourseNameTF: TextInputEditText
     private lateinit var addCourseNameLayout: TextInputLayout
@@ -95,16 +97,17 @@ class AddCourseFragment : DialogFragment() {
     private fun addCourse() {
         if (formatInfoEnterredIsCorrect()) {
             dbHelper!!.insertCourse(CustomCourse(-1, addCourseNameTF.text.toString(), addCourseIdTF.text.toString(), null))
-            //TODO: Close dialog then reload activity
+            // To reload the list of courses
             val act = activity as MainActivity
             act.reloadCourses()
             cancelDialog()
         }
     }
 
+    //Checking info entered is legit
     private fun formatInfoEnterredIsCorrect(): Boolean {
         return (CheckingInputHelper.checkNameFormat(
             addCourseNameTF, addCourseNameLayout
-        ) && CheckingInputHelper.checkNameFormat(addCourseIdTF, addCourseIdLayout))
+        ) && CheckingInputHelper.checkTextFieldIsNotEmpty(addCourseIdTF, addCourseIdLayout))
     }
 }

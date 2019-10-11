@@ -166,6 +166,7 @@ class profileActivity : AppCompatActivity() {
                 return false
             }
             else -> {
+                CheckingInputHelper.cleanIntergers(ageTextField)
                 ageTFLayout.error = ""
             }
         }

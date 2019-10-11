@@ -1,5 +1,7 @@
 package com.example.grade.Classes
-
+/*
+* Used to store values for the database
+* */
 enum class Config(val value: String) {
 
     //For the Course Table

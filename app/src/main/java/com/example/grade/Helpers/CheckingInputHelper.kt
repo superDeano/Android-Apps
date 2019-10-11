@@ -2,7 +2,12 @@ package com.example.grade.Helpers
 
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-
+/**
+ * Created by superDeano
+ * This class is used as a static class to help check the inputs from textfields
+ * It makes sure that if a field contains an error, it displays it
+ * Also used to test and fix texts as required
+ * */
 class CheckingInputHelper {
     companion object {
 
@@ -37,6 +42,8 @@ class CheckingInputHelper {
             }
         }
 
+
+
         fun checkPositiveIntegersOnly(textfield: TextInputEditText, textLayout: TextInputLayout): Boolean {
             if (textfield.text.toString() == "") {
                 textLayout.error = "Enter Something!"
@@ -57,6 +64,18 @@ class CheckingInputHelper {
                     }
                 }
 
+            }
+
+        }
+
+        fun cleanIntergers(textfield: TextInputEditText){
+            var text = textfield.text.toString()
+
+            for (index in text.indices){
+                if (text[index] != '0'){
+                    textfield.setText(text.substring(index))
+                    break
+                }
             }
 
         }

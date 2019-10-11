@@ -12,10 +12,11 @@ import android.widget.Toast
 import com.example.grade.Classes.Assignment
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.Classes.Config
-import java.lang.Exception
 import kotlin.collections.ArrayList
 
-
+/*
+* Database helper class
+* */
 class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
     context, Config.DATABASE_NAME.toString(), null, Config.DATABASE_VERSION.value.toInt()
 ) {
@@ -75,9 +76,16 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
 
 
         try {
+            // Deleting all courses
             dataBase.delete(Config.TABLE_COURSE.value, null, null)
-            val count = DatabaseUtils.queryNumEntries(dataBase, Config.TABLE_COURSE.value)
-            if (count.toInt() == 0) {
+            // Deleting all assignments
+            dataBase.delete(Config.TABLE_ASS.value, null, null)
+
+            val countCourses = DatabaseUtils.queryNumEntries(dataBase, Config.TABLE_COURSE.value)
+            val countAssignments = DatabaseUtils.queryNumEntries(dataBase, Config.TABLE_ASS.value)
+
+            //Checking if both tables are empty
+            if (countCourses.toInt() == 0 && countAssignments.toInt() == 0) {
                 deletedEverything = true
             }
         } catch (e: SQLiteException) {
@@ -101,13 +109,22 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         } finally {
             dataBase.close()
         }
+        deleteAllAssignmentsFromCourse(courseIdInDataBase.toString())
         return courseIdInDataBase
 
     }
 
-    fun deleteAllAssignmentsFromCourse(courseId: String): Boolean {
-        //TODO to implement
+    private fun deleteAllAssignmentsFromCourse(courseId: String): Boolean {
         var success = false
+        val database = writableDatabase
+        try {
+            database.delete(Config.TABLE_ASS.value, Config.COLUMN_ASS_COURSE_ID.value + " = ? ", arrayOf(courseId))
+        } catch (exception: SQLiteException) {
+            Log.d("deleting Ass", exception.message)
+        } finally {
+            database.close()
+        }
+
 
         return success
     }
@@ -135,32 +152,7 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         return id
     }
 
-    fun getAllAssignmentsForCourse(courseId: String): ArrayList<Assignment> {
 
-        val sqLiteDatabase = readableDatabase
-        val assignments = ArrayList<Assignment>()
-        val cursor: Cursor
-
-        try {
-
-            cursor = sqLiteDatabase.query(Config.TABLE_ASS.value, null, Config.COLUMN_ASS_COURSE_ID.value + " = ? ", arrayOf(courseId), null, null, null)
-
-            if (cursor.moveToFirst()) {
-                do {
-
-                    assignments.add(Assignment(cursor.getString(cursor.getColumnIndex(Config.COLUMN_ASS_TITLE.value)), cursor.getString(cursor.getColumnIndex(Config.COLUMN_ASS_GRADE.value)), courseId))
-
-                } while (cursor.moveToNext())
-            }
-
-        } catch (e: SQLiteException) {
-            Log.d("Getting Ass", e.message)
-        } finally {
-            sqLiteDatabase.close()
-        }
-
-        return assignments
-    }
 
     fun getEverything(): ArrayList<CustomCourse> {
         val courses = ArrayList<CustomCourse>()
@@ -168,8 +160,9 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         val courseCursor: Cursor
 
         try {
-
+            // gets cursor to course table
             courseCursor = sqLiteDatabase.query(Config.TABLE_COURSE.value, null, null, null, null, null, null)
+
 
             if (courseCursor.moveToFirst()) {
 
@@ -180,11 +173,13 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
                     val courseId = courseCursor.getInt(courseCursor.getColumnIndex(Config.COLUMN_COURSE_ID.value))
                     val courseCode = courseCursor.getString(courseCursor.getColumnIndex(Config.COLUMN_COURSE_CODE.value))
 
+                    //Cursor in assignment table
                     val assCursor = sqLiteDatabase.query(Config.TABLE_ASS.value, null, Config.COLUMN_ASS_COURSE_ID.value + " = ? ", arrayOf(courseId.toString()), null, null, null)
 
                     if (assCursor.moveToFirst()) {
                         assignments = ArrayList()
 
+                        //Getting all assignments related to the course
                         while (!assCursor.isAfterLast) {
                             val assTitle = assCursor.getString(assCursor.getColumnIndex(Config.COLUMN_ASS_TITLE.value))
                             val assGrade = assCursor.getString(assCursor.getColumnIndex(Config.COLUMN_ASS_GRADE.value))
@@ -203,7 +198,6 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
                         courses.add(CustomCourse(courseId.toLong(), courseTitle, courseCode, null))
                     }
 
-
                 } while (courseCursor.moveToNext())
 
 
@@ -220,8 +214,5 @@ class DataBaseHelper(val context: Context?) : SQLiteOpenHelper(
         return courses
     }
 
-    fun deleteDb() {
-        context?.deleteDatabase(Config.DATABASE_NAME.value)
-    }
 
 }

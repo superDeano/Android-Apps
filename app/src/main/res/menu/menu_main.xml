@@ -19,9 +19,4 @@
         android:title="@string/menu_deleteAllCourses"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_dropDataBase"
-        android:orderInCategory="100"
-        android:title="@string/menu_dropDB"
-        app:showAsAction="never" />
 </menu>

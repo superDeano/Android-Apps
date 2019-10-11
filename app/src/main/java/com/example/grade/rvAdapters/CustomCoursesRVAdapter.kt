@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.grade.Activities.AssignmentActivity
 import com.example.grade.Classes.CustomCourse
 import com.example.grade.R
-
+/*
+* Class responsible for the logic for the recycler adapter used for displaying the custom courses
+* */
 class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
     RecyclerView.Adapter<CustomCoursesRVAdapter.ViewHolder>() {
 
@@ -33,17 +35,20 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        // If there are no courses
         if (customCourses != null) {
             val customCourse = customCourses!![position]
             holder.customCourseName.text = customCourse.courseName
             holder.customCourseIdTV.text = customCourse.courseCode
             val averageGrade = customCourses!![position].courseAverage
+            // Course has no assignments
             if (averageGrade == "0"){
             holder.customCourseAverageGrade.text = "N/A"
             }else{
                 holder.customCourseAverageGrade.setText(averageGrade + "%")
             }
 
+            //Deal with when a card is clicked on
             holder.cardview.setOnClickListener {
 
                 val intent = Intent(holder.cardview.context, AssignmentActivity::class.java)
@@ -53,11 +58,11 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
         }
     }
 
-    fun setData(data: ArrayList<CustomCourse>){
-        customCourses!!.clear()
-        customCourses.addAll(data)
-        notifyDataSetChanged()
-    }
+//    fun setData(data: ArrayList<CustomCourse>){
+//        customCourses!!.clear()
+//        customCourses.addAll(data)
+//        notifyDataSetChanged()
+//    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val customCourseName = itemView.findViewById<TextView>(R.id.customCourseName)

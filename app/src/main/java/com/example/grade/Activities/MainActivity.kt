@@ -44,6 +44,26 @@ class MainActivity : AppCompatActivity() {
         loadProfileUsername()
     }
 
+    override fun onDestroy() {
+        fab.hide()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        fab.hide()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        fab.hide()
+        super.onStop()
+    }
+
+    override fun onResume() {
+        fab.show()
+        reloadCourses()
+        super.onResume()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -60,12 +80,6 @@ class MainActivity : AppCompatActivity() {
         R.id.action_deleteAllCourses -> {
             deleteAllCourses(); true
         }
-        R.id.action_dropDataBase -> {
-            dbHelper.deleteDb()
-            reloadCourses()
-            true
-        }
-
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -110,6 +124,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // ;)
     private fun loadProfileUsername() {
         if (sharedPreference.getProfile() == null || sharedPreference.getProfile().userName == "" || sharedPreference.getProfile().userName == null) {
             welcome_Text.setText("Average Grade")
@@ -120,25 +135,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //To know when the fab is clicked
     private fun addListenerOnFloatingButton() {
         fab.setOnClickListener {
             val addCourseDialog = AddCourseFragment()
             addCourseDialog.setFAB(fab)
+            // animate the fab
             fab.hide()
             addCourseDialog.show(supportFragmentManager, "Insert Course")
-//            reloadCourses()
             Log.v("FAB", "trying to show button")
 
         }
     }
 
+    //Display the courses again in the recycler view
     fun reloadCourses() {
         viewManager = LinearLayoutManager(this)
         viewAdapter = CustomCoursesRVAdapter(getCoursesFromDb())
-        if (calculateAllCoursesAverage() == "N/A"){
-        totalAverageTextView.text = calculateAllCoursesAverage()
-        }else{
-            totalAverageTextView.text = calculateAllCoursesAverage()+"%"
+        if (calculateAllCoursesAverage() == "N/A") {
+            totalAverageTextView.text = calculateAllCoursesAverage()
+        } else {
+            totalAverageTextView.text = calculateAllCoursesAverage() + "%"
         }
         recyclerView = findViewById<RecyclerView>(R.id.customCoursesList).apply {
             layoutManager = viewManager
@@ -146,20 +163,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //TODO : Implement this
+    //Calculates the average for all the courses' average grade
     fun calculateAllCoursesAverage(): String {
         var sum = 0
-        if (courses.size != 0){
-        for (course in courses) {
-            if (course.courseAverage != null) {
-                sum += course.courseAverage!!.toInt()
+        if (courses.size != 0) {
+            for (course in courses) {
+                if (course.courseAverage != null) {
+                    sum += course.courseAverage!!.toInt()
+                }
             }
-        }
-        sum /= courses.size
-        return sum.toString()}else return "N/A"
+            sum /= courses.size
+            return sum.toString()
+        } else return "N/A"
     }
 
-
+    // Get the list of courses from the database
     private fun getCoursesFromDb(): ArrayList<CustomCourse>? {
         courses = dbHelper.getEverything()
         return courses
@@ -170,24 +188,5 @@ class MainActivity : AppCompatActivity() {
         reloadCourses()
     }
 
-    override fun onDestroy() {
-        fab.hide()
-        super.onDestroy()
-    }
 
-    override fun onPause() {
-        fab.hide()
-        super.onPause()
-    }
-
-    override fun onStop() {
-        fab.hide()
-        super.onStop()
-    }
-
-    override fun onResume() {
-        fab.show()
-        reloadCourses()
-        super.onResume()
-    }
 }
