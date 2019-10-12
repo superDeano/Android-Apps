@@ -42,7 +42,7 @@ class CustomCoursesRVAdapter(val customCourses: ArrayList<CustomCourse>?) :
             holder.customCourseIdTV.text = customCourse.courseCode
             val averageGrade = customCourses!![position].courseAverage
             // Course has no assignments
-            if (averageGrade == "0"){
+            if (averageGrade == null){
             holder.customCourseAverageGrade.text = "N/A"
             }else{
                 holder.customCourseAverageGrade.setText(averageGrade + "%")

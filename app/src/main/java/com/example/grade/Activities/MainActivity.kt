@@ -166,13 +166,15 @@ class MainActivity : AppCompatActivity() {
     //Calculates the average for all the courses' average grade
     fun calculateAllCoursesAverage(): String {
         var sum = 0
+        var numOfCoursesWithGrades = 0
         if (courses.size != 0) {
             for (course in courses) {
                 if (course.courseAverage != null) {
                     sum += course.courseAverage!!.toInt()
+                    numOfCoursesWithGrades++
                 }
             }
-            sum /= courses.size
+            sum /= numOfCoursesWithGrades
             return sum.toString()
         } else return "N/A"
     }

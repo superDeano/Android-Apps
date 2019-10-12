@@ -82,7 +82,7 @@ class AssignmentActivity : AppCompatActivity() {
 
     fun initViews() {
         //Showing the title of the course in the action toolbar
-        this.title = course.courseName.capitalize()
+        this.title = "Assignments"
         courseName = findViewById(R.id.customCourseNameInCourseActivity)
         courseID = findViewById(R.id.customCourseIdInCourseActivity)
         floatingActionButton = findViewById(R.id.floatingAddCustomAssButton)

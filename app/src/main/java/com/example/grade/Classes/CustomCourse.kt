@@ -6,7 +6,7 @@ import java.io.Serializable
  * */
 
 class CustomCourse constructor(val id: Long, var courseName: String, var courseCode: String, var assignments: ArrayList<Assignment>?) : Serializable {
-    var courseAverage: String?
+     var courseAverage: String?
 
 
     init {
@@ -15,7 +15,7 @@ class CustomCourse constructor(val id: Long, var courseName: String, var courseC
 
     private fun calculateAverageGrade(): String? {
         if (assignments == null) {
-            return "0"
+            return null
         } else {
             var grade = 0
             for (assignment in assignments!!) {
