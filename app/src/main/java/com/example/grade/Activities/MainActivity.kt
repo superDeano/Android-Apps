@@ -174,6 +174,8 @@ class MainActivity : AppCompatActivity() {
                     numOfCoursesWithGrades++
                 }
             }
+        }
+        if (numOfCoursesWithGrades != 0) {
             sum /= numOfCoursesWithGrades
             return sum.toString()
         } else return "N/A"
