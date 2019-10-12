@@ -72,7 +72,7 @@
                         android:text="Average"
                         android:layout_marginBottom="10dp"
                         android:textAllCaps="true"
-                        android:textColor="#54A15B"
+                        android:textColor="#009688"
                         android:textSize="20dp" />
 
                     <!--Average Grade for Course-->
