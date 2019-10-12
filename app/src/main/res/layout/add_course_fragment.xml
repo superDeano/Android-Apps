@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background"
+    android:background="#03DAC5"
     android:clickable="true"
     android:focusable="true"
     tools:context="com.example.grade.Fragments.AddCourseFragment">
@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="335dp"
-            android:background="#84E893"
+            android:background="#03DAC5"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

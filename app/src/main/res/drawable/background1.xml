@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--Background for each card view-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
-        android:endColor="#2FBD3E"
-        android:startColor="#73DC7D"></gradient>
+        android:endColor="#03DAC5"
+        android:startColor="#03DAC5"></gradient>
 </shape>

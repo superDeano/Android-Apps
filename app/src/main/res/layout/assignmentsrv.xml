@@ -12,7 +12,7 @@
         android:layout_width="280sp"
         android:layout_height="wrap_content"
         android:text="Assigment1"
-        android:textColor="#5C8750"
+        android:textColor="#FFF"
         android:textSize="20dp" />
 
     <!--Assignment Grade -->
@@ -25,7 +25,7 @@
         android:gravity="start"
         android:layout_marginRight="10dp"
         android:text="42%"
-        android:textColor="#5C8750"
+        android:textColor="#FFF"
         android:textSize="20dp" />
 
 </RelativeLayout>

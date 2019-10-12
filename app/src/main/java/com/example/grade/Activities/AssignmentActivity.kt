@@ -122,7 +122,8 @@ class AssignmentActivity : AppCompatActivity() {
         startActivity(goBackToCoursesList)
 
         //Telling the users that the course has been deleted
-        Toast.makeText(this,"This course and its assignments have been deleted",Toast.LENGTH_SHORT)
+        Toast.makeText(this,"This course and its assignments have been deleted",Toast.LENGTH_SHORT).show()
+
     }
 
 

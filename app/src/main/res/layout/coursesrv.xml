@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <!-- The whole Card -->
@@ -41,7 +42,7 @@
                         android:text="test 69"
                         android:textAllCaps="true"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="38dp"
+                        android:textSize="28dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -72,7 +73,7 @@
                         android:layout_marginBottom="10dp"
                         android:textAllCaps="true"
                         android:textColor="#54A15B"
-                        android:textSize="28dp" />
+                        android:textSize="20dp" />
 
                     <!--Average Grade for Course-->
                     <TextView
@@ -83,7 +84,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginBottom="10dp"
                         android:text="N/A"
-                        android:textColor="#ADDE99"
+                        android:textColor="#FFF"
                         android:textSize="45dp"
                         app:fontFamily="sans-serif-black" />
                 </RelativeLayout>
