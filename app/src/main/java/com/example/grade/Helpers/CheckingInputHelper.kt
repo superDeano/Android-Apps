@@ -11,9 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 class CheckingInputHelper {
     companion object {
 
-        fun checkNameFormat(
-            nameTextField: TextInputEditText, nameLayout: TextInputLayout
-        ): Boolean {
+        fun checkNameFormat(nameTextField: TextInputEditText, nameLayout: TextInputLayout): Boolean {
             if (nameTextField.text.toString() == "") {
                 nameLayout.error = "Enter Something!"
                 return false
